@@ -2,7 +2,7 @@
 .hero { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - var(--hdr)); background: var(--ink); }
 .hero .bgimg { --veil: linear-gradient(0deg, var(--ink) 0%, rgba(5, 8, 12, 0.6) 12%, rgba(5, 8, 12, 0) 34%), linear-gradient(90deg, rgba(5, 8, 12, 0.94) 0%, rgba(5, 8, 12, 0.7) 42%, rgba(5, 8, 12, 0.12) 100%); }
 .hero .bgimg img { animation: fade-in 1.4s ease both; }
-.hero-in { padding-block: clamp(56px, 9vw, 120px); }
+.hero-in { padding-block: clamp(56px, 9vw, 120px) clamp(32px, 4.5vw, 64px); }
 .hero-copy { max-width: 44rem; }
 .hero h1 { font-size: clamp(2.7rem, 1rem + 6.4vw, 5.9rem); font-stretch: 84%; line-height: 0.96; color: #fff; }
 .hero h1 .ln { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
@@ -22,6 +22,7 @@
 /* ================= SINAIS ================= */
 .sinais .bgimg { --veil: linear-gradient(180deg, var(--ink) 0%, rgba(5, 8, 12, 0.6) 90px, rgba(5, 8, 12, 0) 300px), linear-gradient(90deg, rgba(5, 8, 12, 0.8), rgba(5, 8, 12, 0.34)); }
 @media (max-width: 700px) { .sinais .bgimg { --veil: linear-gradient(180deg, var(--ink) 0%, rgba(5, 8, 12, 0.6) 70px, rgba(5, 8, 12, 0) 220px), rgba(5, 8, 12, 0.7); } }
+.sinais { padding-top: clamp(44px, 6vw, 88px); }
 .sinais-in { display: grid; gap: 36px; }
 .sinais h2 { color: #fff; }
 .sinais .lead { margin-top: 18px; }
@@ -204,8 +205,12 @@
 .foot .logo { display: inline-flex; padding: 0; }
 .foot-bottom { display: grid; gap: 6px; margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line-d); font-size: 0.85rem; }
 .foot-bottom a { text-decoration: underline; }
+.credits summary { display: inline-block; cursor: pointer; color: var(--on-d2); }
+.credits summary:hover { color: #fff; }
+.credits p { margin-top: 10px; max-width: 46rem; }
 @media (hover: hover) { .foot nav a:hover, .foot-c a:hover { color: #fff; } }
-@media (min-width: 900px) { .foot-in { grid-template-columns: 5fr 3fr 4fr; gap: 64px; } .foot-bottom { grid-template-columns: auto 1fr; gap: 32px; } .foot-bottom span + span { text-align: right; } }
+@media (max-width: 899px) { .foot nav { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; } .foot nav b { grid-column: 1 / -1; } }
+@media (min-width: 900px) { .foot-in { grid-template-columns: 5fr 3fr 4fr; gap: 64px; } .foot-bottom { grid-template-columns: auto 1fr; gap: 32px; } .foot-bottom span + span, .foot-bottom .credits { text-align: right; } }
 
 /* ================= REVELAR AO ROLAR (só coisas leves, em transform: camadas dos sistemas e a linha do processo) ================= */
 .sys.rv::before { transform: scaleX(0); transition: transform 1.1s var(--ease); }

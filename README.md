@@ -23,8 +23,8 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
   A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
 - **Serviços em quadrados** (`#servicos`): 6 quadrados com foto (2 colunas no celular, 3 no desktop). Tocar abre uma janela (`<dialog>` nativo: foco preso, Esc fecha, toque fora fecha, o botão "voltar" do celular fecha)
   com "Por que fazer", "O que a gente faz" e o botão "Quero fazer: pedir orçamento" (WhatsApp, fixo no rodapé da janela). Sem JavaScript/`<dialog>`, o toque leva direto ao WhatsApp. Para editar um serviço, mude o quadrado e a janela `svc-<nome>` no HTML.
-  As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. Lajes e muros usam fotos de obra da Israel (legenda "Obra da Israel"); telhados, paredes, alicerces e piscinas são fotos de banco com licença livre, legendadas "Foto ilustrativa" e creditadas no rodapé
-  (alicerces é CC BY-SA 4.0: o crédito com link é obrigatório; se a foto sair, retire o crédito junto). Troque por fotos reais da Israel assim que houver.
+  As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. **Regra: uma foto, um lugar.** As fotos reais da Israel (cobertura e muro de arrimo) aparecem só em Obras; os quadrados usam fotos de banco de domínio público (CC0),
+  legendadas "Foto ilustrativa" e creditadas em "Créditos das fotos", no rodapé (um `<details>`). Troque por fotos reais de outra obra assim que houver, nunca pela mesma foto de Obras.
 - **Carrosséis** (fotos da sede, avaliações e, no celular, obras): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
   Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. No desktop, as duas fotos de obras ficam lado a lado (sem botões).
