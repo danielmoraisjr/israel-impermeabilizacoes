@@ -1,86 +1,71 @@
+/* Archivo: uma família só. Eixos limitados (peso 400–800, largura 80–100%) para o arquivo ficar pequeno. */
+@font-face {
+  font-family: "Archivo";
+  src: url(/assets/fonts/archivo.woff2) format("woff2");
+  font-weight: 400 800;
+  font-stretch: 80% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --navy: #0a1f33;
+  --navy-2: #0e2a45;
+  --ink: #0b1a28;
+  --bg: #f3f5f6;
+  --card: #fff;
+  --line: rgba(11, 26, 40, 0.14);
+  --line-d: rgba(255, 255, 255, 0.16);
+  --muted: #4a5d6c;
+  --cyan: #00afec;
+  --cyan-d: #0a6da3; /* azul da marca para texto sobre fundo claro (contraste 5:1) */
+  --on-d: #eaf3f9;
+  --on-d2: rgba(234, 243, 249, 0.72);
+
+  --font: "Archivo", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --gut: clamp(20px, 5vw, 56px);
+  --maxw: 1200px;
+  --hdr: 68px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
 *, *::before, *::after { box-sizing: border-box; }
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-padding-top: calc(var(--hdr) + 8px);
-  interpolate-size: allow-keywords;
-}
-
-body {
-  margin: 0;
-  font: 400 1.0625rem/1.62 var(--font);
-  font-stretch: 100%;
-  color: var(--text);
-  background: var(--paper);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: clip;
-}
-
-img, svg, canvas { display: block; max-width: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--hdr) + 8px); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.6 var(--font); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
-p { margin: 0; text-wrap: pretty; }
-ul, ol, dl, dd, figure { margin: 0; padding: 0; list-style: none; }
-button { font: inherit; color: inherit; }
-em { font-style: normal; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+[hidden] { display: none !important; }
 
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 800;
-  font-stretch: 84%;
-  letter-spacing: -0.028em;
-  line-height: 0.98;
-  text-wrap: balance;
-}
-h2 { font-size: clamp(2.2rem, 1.1rem + 4.4vw, 4.6rem); }
-h3 { font-stretch: 92%; font-weight: 700; letter-spacing: -0.018em; line-height: 1.08; }
+h1, h2, h3 { font-weight: 800; font-stretch: 86%; letter-spacing: -0.015em; line-height: 1.02; text-wrap: balance; }
+h2 { font-size: clamp(2rem, 1.15rem + 3.4vw, 3.6rem); }
+h3 { font-size: 1.25rem; font-stretch: 92%; line-height: 1.15; letter-spacing: -0.005em; }
+p { text-wrap: pretty; }
+em { font-style: normal; color: var(--cyan-d); }
 
-.container { width: min(var(--maxw), calc(100% - 2 * var(--gut))); margin-inline: auto; }
-
-.sr {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap;
-}
-
-.skip {
-  position: fixed; left: 12px; top: -64px; z-index: 300;
-  background: #fff; color: #000; padding: 10px 16px; border-radius: 2px;
-  font-weight: 700; transition: top 0.2s;
-}
+.wrap { width: min(var(--maxw), calc(100% - 2 * var(--gut))); margin-inline: auto; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 14px; background: var(--cyan); color: var(--navy); font-weight: 700; text-decoration: none; }
 .skip:focus { top: 12px; }
 
-:focus-visible { outline: 2px solid var(--cyan-2); outline-offset: 3px; }
-.sec-paper :focus-visible, .sec-concrete :focus-visible { outline-color: var(--cyan-ink); }
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
 
-/* ---------- seções e ritmo de cor ---------- */
-.sec { position: relative; padding-block: clamp(84px, 11vw, 168px); }
-.sec-paper { background: var(--paper); }
-.sec-concrete { background: var(--c50); }
-.sec-ink { background: var(--ink); color: var(--on-dark); }
-.sec-deep { background: var(--deep); color: var(--on-dark); }
+.eyebrow { font-size: 0.75rem; font-weight: 700; font-stretch: 100%; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan-d); }
+.lead { max-width: 38rem; font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem); color: var(--muted); }
 
-.sec-head { max-width: 62rem; }
-.sec-head h2 { margin-top: 18px; }
-.lead { margin-top: 22px; max-width: 38rem; font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem); color: var(--muted); }
-.sec-ink .lead, .sec-deep .lead { color: var(--on-dark-2); }
-
-h2 em { color: var(--cyan-ink); }
-.sec-ink h2 em, .sec-deep h2 em, .hero h2 em { color: var(--cyan-2); }
-
-/* legenda técnica: número da prancha + título */
-.eyebrow {
-  display: flex; align-items: center; gap: 14px;
-  font-size: 0.72rem; font-weight: 600; font-stretch: 112%;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--cyan-ink);
+.sec { padding-block: clamp(72px, 10vw, 136px); }
+.eyebrow + h2 { margin-top: 14px; }
+.sec-head { display: grid; gap: 14px 64px; margin-bottom: clamp(36px, 5vw, 64px); }
+.sec-head .eyebrow { grid-column: 1 / -1; }
+@media (min-width: 900px) {
+  .sec-head { grid-template-columns: 6fr 5fr; align-items: end; }
+  .sec-head .eyebrow { grid-column: 1 / -1; }
 }
-.sec-ink .eyebrow, .sec-deep .eyebrow, .hero .eyebrow, .barrier .eyebrow { color: var(--cyan-2); }
-.eb-no { display: inline-grid; place-items: center; min-width: 2.4em; padding: 0.35em 0.5em; border: 1px solid currentColor; line-height: 1; }
-.eb-line { width: 36px; height: 1px; background: currentColor; flex: none; }
-.hide-s, .hide-xs { display: inline; }
-.only-xs { display: none; }
-@media (max-width: 560px) { .hide-s { display: none; } .only-xs { display: inline; } }
 
-.stars { display: inline-flex; gap: 2px; color: #ffb800; }
-.stars svg { width: 15px; height: 15px; }
-.stars.big svg { width: 24px; height: 24px; }
+/* seções escuras */
+.dark { background: var(--navy); color: var(--on-d); }
+.dark .eyebrow { color: #6fd0f7; }
+.dark em { color: #6fd0f7; }
+.dark .lead { color: var(--on-d2); }

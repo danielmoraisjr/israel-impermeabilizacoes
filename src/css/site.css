@@ -1,7 +1,3 @@
-/* Israel Impermeabilizações — Botucatu/SP · ponto de entrada dos estilos */
-@import "./tokens.css";
 @import "./base.css";
 @import "./components.css";
-@import "./hero.css";
 @import "./sections.css";
-@import "./motion.css";
