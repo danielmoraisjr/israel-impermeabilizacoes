@@ -76,10 +76,14 @@ const note = $('#form-note');
 if (form) {
   const openWA = (text) => {
     // link clicado de verdade: abre em nova aba sem ser barrado como pop-up
+    const url = `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
     const a = document.createElement('a');
-    a.href = `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
-    a.target = '_blank'; a.rel = 'noopener';
+    a.href = url; a.target = '_blank'; a.rel = 'noopener';
     document.body.appendChild(a); a.click(); a.remove();
+    // se o navegador barrar ou o WhatsApp não abrir, a mensagem pronta continua a um toque
+    const again = document.createElement('a');
+    again.href = url; again.target = '_blank'; again.rel = 'noopener'; again.textContent = 'Não abriu? Toque aqui.';
+    note.append(' ', again);
   };
   form.addEventListener('submit', (e) => {
     e.preventDefault();

@@ -14,6 +14,15 @@
 @keyframes up { from { transform: translateY(110%); } to { transform: none; } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 
+/* profundidade ao sair do hero: a chuva (fundo) desce devagar e o texto sobe mais rápido e some.
+   Só em navegadores com animação ligada à rolagem; nos outros, o hero fica parado. */
+@keyframes hero-bg { from { transform: scale(1.14) translateY(0); } to { transform: scale(1.14) translateY(5%); } }
+@keyframes hero-fg { 55% { opacity: 1; } to { transform: translateY(-56px); opacity: 0; } }
+@supports (animation-timeline: scroll()) {
+  .hero .bgimg img { animation: fade-in 1.4s ease both, hero-bg linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0px 100svh; }
+  .hero-copy { animation: hero-fg linear both; animation-timeline: scroll(root); animation-range: 0px 70svh; }
+}
+
 /* ================= SINAIS ================= */
 .sinais .bgimg { --veil: linear-gradient(90deg, rgba(5, 8, 12, 0.8), rgba(5, 8, 12, 0.45)); }
 .sinais-in { display: grid; gap: 36px; }
@@ -47,7 +56,8 @@
 
 /* ================= SISTEMAS (explicação em linguagem simples) ================= */
 .sys-grid { display: grid; gap: 24px; }
-.sys { padding: clamp(26px, 3.4vw, 44px); background: var(--navy-2); border: 1px solid var(--line-d); border-top: 3px solid var(--cyan); border-radius: 3px; }
+.sys { position: relative; padding: clamp(26px, 3.4vw, 44px); background: var(--navy-2); border: 1px solid var(--line-d); border-radius: 3px; }
+.sys::before { content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 3px; background: var(--cyan); transform-origin: left; }
 .sys h3 { font-size: clamp(1.7rem, 1.3rem + 1.3vw, 2.4rem); color: #fff; }
 .sys-for { margin-top: 8px; color: var(--cyan-2); font-weight: 600; }
 .sys-dl { display: grid; margin-top: 26px; border-top: 1px solid var(--line-d); }
@@ -57,17 +67,20 @@
 @media (min-width: 640px) { .sys-dl > div { grid-template-columns: 8.5rem 1fr; gap: 24px; } }
 @media (min-width: 900px) { .sys-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
 
-/* ================= OBRAS ================= */
-.obras-in { display: grid; gap: 44px; align-items: start; }
+/* ================= OBRAS (a prova real: fotos grandes, em ritmo assimétrico) ================= */
 .obras h2 { color: #fff; }
-.obras .lead { margin: 18px 0 26px; }
-.arch-grid { display: grid; gap: 32px 24px; }
+.obras-side { display: grid; gap: 22px; justify-items: start; }
+.arch-grid { display: grid; gap: 40px; }
 .arch picture { display: block; }
-.arch img { width: 100%; height: auto; border: 1px solid var(--line-d); background: var(--navy-2); }
-.arch figcaption { margin-top: 12px; font-size: 0.92rem; color: var(--on-d2); }
+.arch img { width: 100%; height: auto; background: var(--navy-2); }
+.arch .ph { border: 1px solid var(--line-d); }
+.arch figcaption { margin-top: 14px; font-size: 0.95rem; color: var(--on-d2); }
 .arch figcaption b { color: #fff; font-weight: 600; }
-@media (min-width: 700px) { .arch-grid { grid-template-columns: 1fr 1fr; } .arch:nth-child(2) { margin-top: 56px; } }
-@media (min-width: 1000px) { .obras-in { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; } }
+.arch-b { width: 82%; justify-self: end; }
+@media (min-width: 900px) {
+  .arch-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: start; }
+  .arch-b { width: auto; justify-self: stretch; margin-top: clamp(72px, 10vw, 150px); }
+}
 
 /* ================= COMO FUNCIONA ================= */
 .wide { margin: 0 0 clamp(44px, 6vw, 80px); }
@@ -94,7 +107,7 @@
 }
 
 /* ================= ORÇAMENTO ================= */
-.orc-sec .bgimg { --veil: linear-gradient(90deg, rgba(5, 8, 12, 0.84), rgba(5, 8, 12, 0.62)); }
+.orc-sec .bgimg { --veil: linear-gradient(90deg, rgba(5, 8, 12, 0.8), rgba(5, 8, 12, 0.5)); }
 .orc { display: grid; gap: 40px; }
 .orc h2 { color: #fff; }
 .orc .lead { margin-top: 18px; }
@@ -107,7 +120,7 @@
 @media (min-width: 900px) { .faq { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 80px; } }
 
 /* ================= AVALIAÇÕES (fecham a página, antes do contato) ================= */
-.rev .bgimg { --veil: rgba(8, 18, 28, 0.9); }
+.rev .bgimg { --veil: linear-gradient(90deg, rgba(8, 18, 28, 0.74), rgba(8, 18, 28, 0.66)); }
 .proof { display: grid; gap: 48px; }
 .proof h2 { color: #fff; }
 .score { margin: 30px 0 22px; }
@@ -124,8 +137,6 @@
 
 /* ================= CONTATO ================= */
 .contato { padding-bottom: clamp(64px, 8vw, 104px); }
-.contato .bgimg { --veil: linear-gradient(180deg, rgba(5, 8, 12, 0.92), rgba(5, 8, 12, 0.8)); }
-.contato .bgimg img { transform: scaleX(-1); }
 .ct-head { max-width: 46rem; }
 .contato h2 { font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.6rem); font-stretch: 84%; line-height: 0.98; color: #fff; }
 .contato .lead { margin-top: 22px; }
@@ -175,7 +186,15 @@
 .rv .ph img { transform: scale(1.06); transition: transform 1.3s var(--ease); }
 .rv.in .ph { clip-path: inset(0); }
 .rv.in .ph img { transform: none; }
-.arch:nth-child(2).rv .ph { transition-delay: 0.14s; }
+.sys.rv::before { transform: scaleX(0); transition: transform 1.1s var(--ease); }
+.sys.rv.in::before { transform: none; }
+.arch-b.rv .ph, .sys + .sys.rv::before { transition-delay: 0.14s; }
+
+/* a foto desliza dentro da moldura enquanto passa pela tela (só onde há animação ligada à rolagem) */
+@keyframes drift { from { transform: translateY(-5%) scale(1.12); } to { transform: translateY(5%) scale(1.12); } }
+@supports (animation-timeline: view()) {
+  .arch picture { animation: drift linear both; animation-timeline: view(); animation-range: cover; }
+}
 
 @media (max-width: 560px) {
   .eyebrow { gap: 10px; font-size: 0.7rem; letter-spacing: 0.12em; }
