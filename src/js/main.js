@@ -87,6 +87,40 @@ if (hasIO && !reduce) {
   if (proc) io.observe(proc);
 } else if (proc) proc.classList.add('in');
 
+// ---------- carrosséis (fotos e avaliações): a rolagem é do navegador; aqui só botões, pontos e rótulos de acessibilidade ----------
+$$('[data-car]').forEach((car) => {
+  const track = $('.car-track', car);
+  const slides = track ? [...track.children] : [];
+  if (slides.length < 2) return;
+  car.setAttribute('role', 'region');
+  car.setAttribute('aria-roledescription', 'carrossel');
+  slides.forEach((s, i) => s.setAttribute('aria-label', `${i + 1} de ${slides.length}`));
+
+  const mk = (cls, label) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; b.setAttribute('aria-label', label); return b; };
+  const prev = mk('car-btn car-prev', 'Anterior');
+  const next = mk('car-btn car-next', 'Próximo');
+  const dots = document.createElement('div');
+  dots.className = 'car-dots';
+  const ds = slides.map((_, i) => { const d = mk('car-dot', `Ir para ${i + 1} de ${slides.length}`); d.addEventListener('click', () => go(i)); dots.append(d); return d; });
+  const ui = document.createElement('div');
+  ui.className = 'car-ui';
+  ui.append(prev, dots, next);
+  car.append(ui);
+
+  const idx = () => { let k = 0, best = Infinity; slides.forEach((s, i) => { const d = Math.abs(s.offsetLeft - track.scrollLeft); if (d < best) { best = d; k = i; } }); return k; };
+  const mark = () => { const k = idx(); ds.forEach((d, i) => d.setAttribute('aria-current', String(i === k))); };
+  const go = (i) => { const n = slides.length; track.scrollTo({ left: slides[((i % n) + n) % n].offsetLeft, behavior: reduce ? 'auto' : 'smooth' }); };
+  prev.addEventListener('click', () => go(idx() - 1));
+  next.addEventListener('click', () => go(idx() + 1));
+
+  let tick = 0;
+  track.addEventListener('scroll', () => { cancelAnimationFrame(tick); tick = requestAnimationFrame(mark); }, { passive: true });
+  // o trilho só entra na ordem do Tab quando realmente rola (no desktop, as fotos de obras ficam lado a lado e não rolam)
+  const sync = () => { track.tabIndex = track.scrollWidth > track.clientWidth + 1 ? 0 : -1; mark(); };
+  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(track); else addEventListener('resize', sync);
+  sync();
+});
+
 // ---------- formulário → mensagem pronta no WhatsApp ----------
 const form = $('#form');
 const note = $('#form-note');

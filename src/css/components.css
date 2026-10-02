@@ -103,6 +103,23 @@ body.menu-open { overflow: hidden; }
 @keyframes pop { 0% { transform: scale(0.8); } 60% { transform: scale(1.12); } 100% { transform: none; } }
 @media (hover: hover) { .chk:hover { border-color: rgba(255, 255, 255, 0.6); } }
 
+/* ---------- carrossel: rolagem nativa com encaixe; botões e pontos (criados pelo JS) só somam comodidade ---------- */
+.car { position: relative; min-width: 0; max-width: 100%; }
+.car-track { position: relative; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-track:focus-visible { outline-offset: 4px; }
+.car-slide { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+.car-ui { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.car-btn { position: relative; flex: none; width: 48px; height: 48px; padding: 0; background: transparent; color: inherit; border: 1.5px solid currentColor; border-radius: 3px; cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.15s var(--ease); -webkit-tap-highlight-color: transparent; }
+.car-btn::before { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translate(-30%, -50%) rotate(-45deg); }
+.car-prev::before { transform: translate(-70%, -50%) rotate(135deg); }
+.car-btn:active { transform: scale(0.95); }
+.car-dots { display: flex; margin: 0 auto; }
+.car-dot { position: relative; width: 28px; height: 44px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.car-dot::before { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: currentColor; opacity: 0.35; transition: opacity 0.2s, transform 0.25s var(--ease); }
+.car-dot[aria-current="true"]::before { opacity: 1; transform: scale(1.5); }
+@media (hover: hover) { .car-btn:hover { background: var(--cyan); border-color: var(--cyan); color: var(--ink); } .car-dot:hover::before { opacity: 0.8; } }
+
 /* ---------- perguntas frequentes ---------- */
 .faq-list { border-top: 1px solid var(--line); }
 .faq-list details { border-bottom: 1px solid var(--line); }

@@ -21,6 +21,11 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
   Cada foto de fundo sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
   o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (telhas, aplicação, obras, sede) usam qualidade maior.
   Os efeitos de profundidade usam zoom mínimo (5–6%) para não amaciar as fotos. A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
+- **Carrosséis** (fotos da sede, avaliações e, no celular, obras): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
+  continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
+  Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. No desktop, as duas fotos de obras ficam lado a lado (sem botões).
+- **Fotos usadas e descartadas**: da sede entraram só três (estoque, veículos da equipe e rolos de manta), com as placas borradas antes da limpeza. Ficaram de fora fotos com objetos pessoais, enquadramentos ruins
+  e os stories de Instagram (arte de terceiros e texto embutido na imagem). Os originais enviados pelo cliente ficam na pasta `originais-cliente/`, ignorada pelo git de propósito (o repositório é público e as fotos têm placas sem borrar).
 - **Só conteúdo real**: textos, endereço, telefone e avaliações vêm da própria empresa (Google). Sem produtos, preços, números ou clientes inventados.
   Fatos informados pela empresa: horário (segunda a sexta, 7h30 às 17h; sábado e domingo fechado), atendimento em Botucatu e região, 12 anos no ramo,
   garantia de 5 anos, orçamento sem taxa em Botucatu e taxa de visita fora da cidade.
