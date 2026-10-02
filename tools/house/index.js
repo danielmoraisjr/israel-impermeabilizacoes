@@ -207,10 +207,11 @@ function mount(container, opts = {}) {
     },
     onFlash(cb) { flashCb = cb; },
     /** um quadro determinístico (pôster / movimento reduzido) */
-    still(seconds = 3) {
+    still(seconds = 3, { flash = 0 } = {}) {
       Math.random = (() => { let s = 12345; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
       for (let i = 0; i < maxDrops; i++) respawn(rain.drops, i, true);
       for (let t = 0; t < seconds; t += 0.033) step(0.033);
+      if (flash) { nextBolt = 99; boltLeft = 0; live.flash = flash; step(0.0001); }
       renderer.render(scene, camera);
     },
     dispose() { api.setActive(false); ro.disconnect(); renderer.dispose(); el.remove(); },

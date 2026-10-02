@@ -1,46 +1,71 @@
-// HERO — a casa 3D carrega depois da primeira pintura; o pôster aparece na hora.
-// Controles (Garoa / Chuva / Temporal e Barreira ligada/desligada) só reagem a clique ou toque.
-import { $, $$, reduceMotion, lite, watchVisible } from '../lib/dom.js';
+// HERO — a casa é uma imagem leve; os botões só trocam de imagem (clima e barreira), sem WebGL nem animação contínua.
+// Só reage a clique/toque. As imagens dos outros estados são buscadas na hora do clique (ou em ocioso, se a conexão for boa).
+import { $, $$, reduceMotion } from '../lib/dom.js';
 
 const NOTES = {
   on: 'Com a barreira, a água fica lá fora.',
-  off: 'Sem a barreira, a água entra: o telhado encharca, a calha transborda e nasce a goteira.',
+  off: 'Sem a barreira, a água entra: o telhado encharca e nasce a goteira.',
 };
-
-// sem criar contexto à toa: a prova real é o mount (que cai no pôster se falhar ou se o GL for por software)
-const webgl = () => 'WebGL2RenderingContext' in window;
+const ALT = {
+  on: 'Casa protegida por uma bolha azul enquanto chove: a água escorre pela bolha e não chega ao telhado',
+  off: 'Casa sem proteção sob chuva: o telhado encharca e aparecem manchas de umidade nas paredes',
+};
 
 export function initHero({ gsap }) {
   const hero = $('[data-hero]');
   if (!hero) return;
   const stage = $('.hero-stage', hero);
-  const mount = $('.house-mount', stage);
   const panel = $('.weather', stage);
   const note = $('[data-note]', stage);
   const rest = $$('[data-gated]', hero);
 
   // entrada: textos aparecem em "pincelada"; o título já anima por CSS
-  // a casa 3D só entra depois que a entrada dos textos termina (evita competir por quadros)
-  let introDone = Promise.resolve();
   if (reduceMotion) { document.documentElement.classList.add('ready'); }
   else {
     gsap.set(rest, { clipPath: 'inset(0 100% 0 0)' });
     document.documentElement.classList.add('ready');
-    introDone = new Promise((res) => {
-      gsap.to(rest, { clipPath: 'inset(0 0% 0 0)', duration: 1.0, stagger: 0.12, ease: 'power3.inOut', delay: 0.5, clearProps: 'clipPath', onComplete: res });
-      setTimeout(res, 4500);
-    });
+    gsap.to(rest, { clipPath: 'inset(0 0% 0 0)', duration: 1.0, stagger: 0.12, ease: 'power3.inOut', delay: 0.5, clearProps: 'clipPath' });
   }
 
-  // ----- controles -----
+  // ----- imagens por estado -----
+  const base = stage.dataset.casa;
+  const imgs = new Map();
+  const first = $('.house-img', stage);
+  imgs.set(first.dataset.state, first);
+  const sizes = first.getAttribute('sizes');
+  const make = (key) => {
+    if (imgs.has(key)) return imgs.get(key);
+    const im = new Image();
+    im.className = 'house-img'; im.dataset.state = key; im.alt = ''; im.decoding = 'async';
+    im.sizes = sizes; im.width = first.width; im.height = first.height;
+    im.srcset = `${base}${key}-720.webp 720w, ${base}${key}-1100.webp 1100w`;
+    im.src = `${base}${key}-720.webp`;
+    stage.insertBefore(im, panel);
+    imgs.set(key, im);
+    return im;
+  };
+
   const want = { weather: 'chuva', barrier: true };
-  let ctrl = null;
+  let shown = first, token = 0;
+  const show = (key) => {
+    const my = ++token;
+    const im = make(key);
+    const go = () => {
+      if (my !== token || im === shown) return;
+      if (reduceMotion) im.style.transition = 'none';
+      im.classList.add('is-on'); shown.classList.remove('is-on');
+      shown.removeAttribute('alt'); shown.alt = '';
+      shown = im; im.alt = want.barrier ? ALT.on : ALT.off;
+    };
+    // só troca quando a imagem já pode ser desenhada (sem piscar em branco)
+    (im.complete ? Promise.resolve() : new Promise((r) => { im.addEventListener('load', r, { once: true }); im.addEventListener('error', r, { once: true }); })).then(() => (im.decode ? im.decode().catch(() => {}) : null)).then(go);
+  };
+
   const sync = () => {
     $$('[data-wx]', panel).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.wx === want.weather)));
     $$('[data-barrier]', panel).forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.barrier === 'on') === want.barrier)));
     note.textContent = want.barrier ? NOTES.on : NOTES.off;
-    stage.classList.toggle('is-open', !want.barrier);
-    if (ctrl) { ctrl.setWeather(want.weather); ctrl.setBarrier(want.barrier); }
+    show(`${want.weather}-${want.barrier ? 'on' : 'off'}`);
   };
   panel.addEventListener('click', (e) => {
     const b = e.target.closest('button');
@@ -50,28 +75,14 @@ export function initHero({ gsap }) {
     sync();
   });
 
-  // ----- 3D sob demanda -----
-  const ok = !reduceMotion && !lite && webgl() && !new URLSearchParams(location.search).has('nogl');
-  if (!ok) { stage.classList.add('is-static'); return; }
-
-  const load = () => {
-    const s = document.createElement('script');
-    s.src = stage.dataset.houseSrc; s.async = true;
-    s.onload = () => {
-      try {
-        ctrl = window.IsraelHouse.mount(mount, { weather: want.weather, barrier: want.barrier, force: /[?&]gl=force/.test(location.search) });
-      } catch (err) { stage.classList.add('is-static'); return; }
-      ctrl.onFlash((v) => stage.style.setProperty('--flash', v.toFixed(3)));
-      watchVisible(hero, (v) => ctrl.setActive(v), '0px');
-      stage.classList.add('is-3d');
-      panel.hidden = false;
-      requestAnimationFrame(() => requestAnimationFrame(() => stage.classList.add('is-live')));
-      sync();
-    };
-    s.onerror = () => stage.classList.add('is-static');
-    document.head.appendChild(s);
-  };
-  const go = () => ('requestIdleCallback' in window ? requestIdleCallback(load, { timeout: 1500 }) : setTimeout(load, 400));
-  const loaded = new Promise((res) => (document.readyState === 'complete' ? res() : addEventListener('load', res, { once: true })));
-  Promise.all([loaded, introDone]).then(go);
+  // conexão boa e sem economia de dados: deixa a "goteira" pronta quando o controle aparece na tela
+  const net = navigator.connection;
+  if (!(net && (net.saveData || /2g/.test(net.effectiveType || ''))) && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((e) => {
+      if (!e[0].isIntersecting) return;
+      io.disconnect();
+      ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(() => make('chuva-off'), { timeout: 4000 });
+    });
+    addEventListener('load', () => io.observe(panel), { once: true });
+  }
 }

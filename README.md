@@ -10,9 +10,9 @@ Site estático (HTML + CSS + JS), sem framework. Hospedado na Vercel.
 **Água → infiltração → barreira → tranquilidade.**
 A impermeabilização é tratada como uma barreira entre o imóvel e a água. A cor ciano da marca aparece **só onde há proteção**.
 
-- **Hero** — uma casa em 3D (three.js) protegida por uma bolha. Chove sobre ela e a água escorre na bolha. O visitante escolhe
-  **Garoa / Chuva / Temporal** e liga ou desliga a **barreira**: sem ela, o telhado encharca, a calha pinga e aparecem manchas nas paredes
-  (a goteira). Tudo reage só a **clique/toque** — nenhum efeito depende de hover.
+- **Hero** — uma casa protegida por uma bolha, sob chuva. O visitante escolhe **Garoa / Chuva / Temporal** e liga ou desliga a
+  **barreira**: sem ela, o telhado encharca e aparecem manchas nas paredes (a goteira). É uma **imagem leve** que troca ao clicar/tocar —
+  não há animação contínua, WebGL nem JavaScript pesado. Nenhum efeito depende de hover.
 - **Sinais** — marcar o que a pessoa está vendo monta a mensagem de WhatsApp.
 - **Serviços** — um serviço por vez, com o corte desenhado ao selecionar (clique/teclado).
 - **Dois sistemas** — manta asfáltica e argamassa em camadas.
@@ -23,16 +23,12 @@ A impermeabilização é tratada como uma barreira entre o imóvel e a água. A 
 
 > Nada de clientes, obras, números ou resultados inventados. O site **não** exibe produtos nem preços.
 
-## Casa 3D: como funciona
+## A casa do hero
 
-- `src/house/` é um **pacote separado** (`assets/js/house.[hash].js`, ~590 KB minificado) carregado **sob demanda**,
-  depois da entrada dos textos. O site em si (`site.[hash].js`) tem ~130 KB.
-- Tudo é procedural (texturas desenhadas em canvas, sem imagens externas): `textures.js` (materiais), `build.js` (casa, terreno, cerca),
-  `effects.js` (bolha com shader, chuva, respingos), `index.js` (luz, câmera, clima, desempenho adaptativo).
-- **Plano B**: sem WebGL, com `prefers-reduced-motion`, modo "economizar dados" ou `?nogl` na URL, o site mostra
-  `assets/img/casa-poster.webp` (um quadro da própria cena) e esconde os controles.
-- A resolução e a quantidade de gotas se ajustam sozinhas se o aparelho não sustentar a taxa de quadros.
-- Para regenerar o pôster: sirva a raiz em `http://localhost:4173` e rode `node scripts/make-poster.mjs` (precisa do Playwright, só local).
+- O site publicado usa só imagens: `assets/img/casa/{clima}-{on|off}-{720|1100}.webp` (6 estados × 2 tamanhos, 50–200 KB cada,
+  com `srcset`). A do estado inicial é pré-carregada; as outras são buscadas no clique (ou em ocioso, se a conexão for boa e sem economia de dados).
+- As imagens foram geradas a partir de uma cena 3D procedural em `tools/house/` (three.js). **Isso não vai para o site**: three.js é só
+  dependência de desenvolvimento. Para regenerar (só se a cena mudar): `npm i -D playwright` e `node tools/render-stills.mjs`.
 
 ## Estrutura
 
@@ -41,13 +37,13 @@ index.html              conteúdo (todo o texto, SEO e dados estruturados estão
 vercel.json             cabeçalhos de segurança (CSP), cache
 src/css/                estilos por assunto (tokens, base, componentes, hero, sections, motion)
 src/js/main.js          ponto de entrada (inicialização em etapas)
-src/js/modules/         hero (controles + carga da casa), signs, services, sections, ui, forms
+src/js/modules/         hero (troca de imagem da casa), signs, services, sections, ui, forms
 src/js/lib/             dom, wa (número e mensagens do WhatsApp)
-src/house/              casa 3D (three.js) — empacotada à parte
+tools/house/            cena 3D usada apenas para gerar as imagens da casa (não é publicada)
 assets/                 arquivos publicados (css/js compilados com hash, fontes, imagens)
 scripts/build.mjs       compila src/ → assets/
 scripts/make-assets.mjs gera ícones do app
-scripts/make-poster.mjs gera o pôster da casa 3D
+tools/render-stills.mjs gera as imagens da casa a partir de tools/house
 ```
 
 ## Comandos

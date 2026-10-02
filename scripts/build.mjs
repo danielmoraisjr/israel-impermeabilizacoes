@@ -60,17 +60,6 @@ const js = {
   minify: !watch,
 };
 
-const house = {
-  ...common,
-  plugins: [finalize('js', 'house')],
-  entryPoints: { house: 'src/house/index.js' },
-  outdir: 'assets/js',
-  entryNames: '[name].[hash]',
-  format: 'iife',
-  target: ['es2020', 'chrome90', 'safari14', 'firefox90'],
-  minify: !watch,
-};
-
 const css = {
   ...common,
   plugins: [finalize('css')],
@@ -83,9 +72,9 @@ const css = {
 };
 
 if (watch) {
-  const ctxs = await Promise.all([context(js), context(css), context(house)]);
+  const ctxs = await Promise.all([context(js), context(css)]);
   await Promise.all(ctxs.map((c) => c.watch()));
   console.log('observando src/ …');
 } else {
-  await Promise.all([build(js), build(css), build(house)]);
+  await Promise.all([build(js), build(css)]);
 }
