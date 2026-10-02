@@ -24,9 +24,9 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.TZ5VXXKK.css">
+<link rel="stylesheet" href="/assets/css/site.ICHY5ZOP.css">
 <script id="boot">document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('failsafe')},5000);</script>
-<script src="/assets/js/site.DEL2FCKU.js" defer></script>
+<script src="/assets/js/site.QSL6JLFJ.js" defer></script>
 
 <script type="application/ld+json">
 {
@@ -148,42 +148,34 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio" aria-labelledby="h1" data-hero>
-  <canvas class="hero-rain" aria-hidden="true"></canvas>
-  <div class="hero-art" aria-hidden="true">
-    <svg class="hero-svg" viewBox="0 0 800 800" focusable="false">
-      <defs>
-        <linearGradient id="g-win" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffeabb"/><stop offset="1" stop-color="#ffc462"/></linearGradient>
-        <linearGradient id="g-ground" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <mask id="m-ground"><rect x="40" y="620" width="720" height="120" fill="url(#g-ground)"/></mask>
-        <pattern id="pt-hh" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V14" stroke="#8fe3ff" stroke-opacity=".34" stroke-width="1"/></pattern>
-      </defs>
-      <rect x="40" y="621" width="720" height="120" fill="url(#pt-hh)" mask="url(#m-ground)" class="h-hatch"/>
-      <g class="h-lines" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path class="d" pathLength="1" d="M40 620H760" stroke-opacity=".5"/>
-        <path class="d" pathLength="1" d="M240 620V484M560 620V484"/>
-        <path class="d" pathLength="1" d="M205 488L400 346L595 488"/>
-        <path class="d" pathLength="1" d="M242 478L400 364L558 478"/>
-        <path class="d" pathLength="1" d="M470 400V366H496V412"/>
-        <path class="d" pathLength="1" d="M365 620V540H435V620"/>
-        <path class="d" pathLength="1" d="M266 520H330V582H266ZM298 520V582M266 551H330"/>
-        <path class="d" pathLength="1" d="M470 520H534V582H470ZM502 520V582M470 551H534"/>
-        <path class="d" pathLength="1" d="M240 662H560M240 654V670M560 654V670" stroke-opacity=".34"/>
-      </g>
-      <g class="h-win" opacity="0">
-        <rect x="267" y="521" width="62" height="60" fill="url(#g-win)"/><rect x="471" y="521" width="62" height="60" fill="url(#g-win)"/>
-        <path d="M298 521V581M267 551H329M502 521V581M471 551H533" stroke="#04111d" stroke-opacity=".5" stroke-width="2"/>
-      </g>
-    </svg>
+  <div class="hero-stage" data-house-src="/assets/js/house.SXKQJGU5.js">
+    <img class="house-poster" src="/assets/img/casa-poster.webp" alt="Casa protegida por uma bolha de energia enquanto chove" width="1088" height="920" decoding="async" fetchpriority="high">
+    <div class="house-mount"></div>
+    <div class="storm-flash" aria-hidden="true"></div>
+    <div class="weather" hidden>
+      <div class="wx-row" role="group" aria-label="Faça chover">
+        <span class="wx-label">Faça chover</span>
+        <button type="button" data-wx="garoa" aria-pressed="false">Garoa</button>
+        <button type="button" data-wx="chuva" aria-pressed="true">Chuva</button>
+        <button type="button" data-wx="temporal" aria-pressed="false">Temporal</button>
+      </div>
+      <div class="wx-row" role="group" aria-label="Barreira impermeabilizante">
+        <span class="wx-label">Barreira</span>
+        <button type="button" data-barrier="on" aria-pressed="true">Ligada</button>
+        <button type="button" data-barrier="off" aria-pressed="false">Desligada</button>
+      </div>
+      <p class="wx-note" aria-live="polite" data-note>Com a barreira, a água fica lá fora.</p>
+    </div>
   </div>
 
   <div class="container hero-in">
-    <p class="eyebrow hero-eyebrow" data-gated><span class="eb-line"></span>Botucatu – SP<span class="hide-s"> · Manta asfáltica e argamassa impermeabilizante</span></p>
+    <p class="eyebrow hero-eyebrow" data-gated><span class="eb-line"></span><span class="only-xs">Impermeabilização em </span>Botucatu – SP<span class="hide-s"> · Manta asfáltica e argamassa impermeabilizante</span></p>
     <h1 id="h1" class="hero-title">
       <span class="ln"><span class="ln-in dim" style="--i:0">Água lá fora.</span></span>
       <span class="ln"><span class="ln-in" style="--i:1">Tranquilidade</span></span>
       <span class="ln"><span class="ln-in" style="--i:2">aqui dentro.</span></span>
     </h1>
-    <p class="hero-lead" data-gated>Impermeabilização profissional para telhados, lajes, paredes, muros de arrimo, alicerces e piscinas. Para residências, comércios e indústrias, com dedicação do primeiro contato à entrega.</p>
+    <p class="hero-lead" data-gated>Impermeabilização profissional para telhados, lajes, paredes, muros de arrimo, alicerces e piscinas.<span class="hide-s"> Para residências, comércios e indústrias, com dedicação do primeiro contato à entrega.</span></p>
     <div class="hero-cta" data-gated>
       <a class="btn btn-cta btn-lg" href="https://wa.me/5514997341789?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20sem%20compromisso." target="_blank" rel="noopener"><span class="btn-t">Pedir orçamento<span class="hide-xs">&nbsp;no WhatsApp</span></span><span class="btn-i"><svg aria-hidden="true"><use href="#i-wa"/></svg></span></a>
       <a class="link-arrow" href="#servicos">Ver serviços<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>

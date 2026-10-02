@@ -24,21 +24,21 @@ function syncBootHash() {
 }
 
 // cada compilação cuida só da sua pasta: apaga versões antigas e aponta o index.html para a nova
-const finalize = (ext) => ({
-  name: `finalize-${ext}`,
+const finalize = (ext, prefix = 'site') => ({
+  name: `finalize-${prefix}-${ext}`,
   setup(b) {
     b.onEnd((result) => {
       if (!result.metafile) return;
-      const outs = Object.keys(result.metafile.outputs).filter((f) => f.endsWith(`.${ext}`));
+      const outs = Object.keys(result.metafile.outputs).filter((f) => f.endsWith(`.${ext}`) && f.split('/').pop().startsWith(`${prefix}.`));
       const dir = `assets/${ext}`;
       const keep = new Set(outs.map((f) => f.split('/').pop()));
       for (const f of readdirSync(dir)) {
-        if (new RegExp(`^site\\.[A-Z0-9]{8}\\.${ext}$`).test(f) && !keep.has(f)) rmSync(`${dir}/${f}`);
+        if (new RegExp(`^${prefix}\\.[A-Z0-9]{8}\\.${ext}$`).test(f) && !keep.has(f)) rmSync(`${dir}/${f}`);
       }
       let html = readFileSync('index.html', 'utf8');
       for (const f of outs) {
         const name = f.split('/').pop();
-        html = html.replace(new RegExp(`/assets/${ext}/site(\\.[A-Z0-9]{8})?\\.${ext}`, 'g'), `/assets/${ext}/${name}`);
+        html = html.replace(new RegExp(`/assets/${ext}/${prefix}(\\.[A-Z0-9]{8})?\\.${ext}`, 'g'), `/assets/${ext}/${name}`);
       }
       writeFileSync('index.html', html);
       syncBootHash();
@@ -60,6 +60,17 @@ const js = {
   minify: !watch,
 };
 
+const house = {
+  ...common,
+  plugins: [finalize('js', 'house')],
+  entryPoints: { house: 'src/house/index.js' },
+  outdir: 'assets/js',
+  entryNames: '[name].[hash]',
+  format: 'iife',
+  target: ['es2020', 'chrome90', 'safari14', 'firefox90'],
+  minify: !watch,
+};
+
 const css = {
   ...common,
   plugins: [finalize('css')],
@@ -72,9 +83,9 @@ const css = {
 };
 
 if (watch) {
-  const ctxs = await Promise.all([context(js), context(css)]);
+  const ctxs = await Promise.all([context(js), context(css), context(house)]);
   await Promise.all(ctxs.map((c) => c.watch()));
   console.log('observando src/ …');
 } else {
-  await Promise.all([build(js), build(css)]);
+  await Promise.all([build(js), build(css), build(house)]);
 }

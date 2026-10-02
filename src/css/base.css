@@ -78,7 +78,8 @@ h2 em { color: var(--cyan-ink); }
 .eb-no { display: inline-grid; place-items: center; min-width: 2.4em; padding: 0.35em 0.5em; border: 1px solid currentColor; line-height: 1; }
 .eb-line { width: 36px; height: 1px; background: currentColor; flex: none; }
 .hide-s, .hide-xs { display: inline; }
-@media (max-width: 560px) { .hide-s { display: none; } }
+.only-xs { display: none; }
+@media (max-width: 560px) { .hide-s { display: none; } .only-xs { display: inline; } }
 
 .stars { display: inline-flex; gap: 2px; color: #ffb800; }
 .stars svg { width: 15px; height: 15px; }
