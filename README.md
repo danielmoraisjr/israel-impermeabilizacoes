@@ -55,6 +55,11 @@ Os arquivos de `assets/` **são versionados**: a Vercel publica a pasta como est
 Depois de mexer em `src/`, rode `npm run build` e faça o commit dos arquivos gerados.
 Para ver localmente: `python3 -m http.server 4173` (ou qualquer servidor estático na raiz).
 
+## Ao registrar o domínio próprio (checklist)
+
+Hoje o endereço é `israel-impermeabilizacoes.vercel.app`. Quando o `.com.br` estiver ativo, troque a URL antiga em: `index.html` (canonical, `og:url`, `og:image`, e os blocos JSON-LD),
+`sitemap.xml` e `robots.txt`; depois ligue o domínio no projeto da Vercel e refaça `npm run build`. Redirecione o endereço antigo para o novo.
+
 ## Como editar
 
 - **Textos, horário, endereço, garantia**: `index.html`. O horário aparece em Contato, no rodapé e nos dados estruturados (`openingHoursSpecification`); as perguntas do FAQ aparecem no HTML e também no JSON-LD (mantenha os dois iguais).

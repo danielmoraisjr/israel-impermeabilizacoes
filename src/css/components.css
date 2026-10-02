@@ -15,8 +15,9 @@
   .btn-ghost:hover { background: rgba(255, 255, 255, 0.08); }
 }
 
-.link { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--cyan-2); text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
+.link { position: relative; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--cyan-2); text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
 .paper .link { color: var(--cyan-d); }
+.link::before, .tel2::before, .ct-grid a.sub::before, .menu-tel::before { content: ""; position: absolute; inset: -12px -8px; }
 @media (hover: hover) { .link { transition: color 0.2s, border-color 0.2s; } .link:hover { color: #fff; border-color: var(--cyan); } .paper .link:hover, .white .link:hover { color: var(--ink); } }
 
 /* ---------- cabeçalho ---------- */
@@ -57,7 +58,7 @@
 .menu-nav a { padding: 16px 0; border-bottom: 1px solid var(--line-d); font-size: 1.7rem; font-weight: 700; font-stretch: 88%; text-decoration: none; }
 .menu-foot { display: grid; gap: 14px; }
 .menu-foot p { color: var(--on-d2); font-size: 0.95rem; }
-.menu-tel { font-weight: 700; text-decoration: none; }
+.menu-tel { position: relative; font-weight: 700; text-decoration: none; }
 body.menu-open { overflow: hidden; }
 
 /* ---------- botão flutuante do WhatsApp ---------- */

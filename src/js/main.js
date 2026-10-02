@@ -54,8 +54,8 @@ if (openEl) {
     const min = +p.hour * 60 + +p.minute;
     const work = wd >= 1 && wd <= 5;
     const open = work && min >= 7 * 60 + 30 && min < 17 * 60;
-    let msg = 'Em horário de atendimento · até as 17h';
-    if (!open) msg = work && min < 7 * 60 + 30 ? 'Fora do horário · abrimos hoje às 7h30' : `Fora do horário · abrimos ${wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda'} às 7h30`;
+    let msg = 'Atendendo agora · até as 17h';
+    if (!open) msg = `Respondemos ${work && min < 7 * 60 + 30 ? 'hoje' : wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda'} a partir das 7h30`;
     openEl.classList.toggle('is-open', open);
     $('span', openEl).textContent = msg;
   } catch { /* sem Intl: fica o horário fixo do HTML */ }
