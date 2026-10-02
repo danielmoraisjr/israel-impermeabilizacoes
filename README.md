@@ -45,7 +45,7 @@ npm run dev          # recompila ao salvar
 npm run assets       # regenera og.jpg / icon-192.png / icon-512.png (precisa do Playwright)
 ```
 
-Os arquivos de `assets/` **são versionados**: a Vercel publica a pasta como está, sem etapa de build.
+Os arquivos de `assets/` **são versionados**: a Vercel publica a pasta como está, sem etapa de build (o script `vercel-build` apenas avisa isso).
 Depois de mexer em `src/`, rode `npm run build` e faça o commit dos arquivos gerados.
 
 Para ver localmente: `npx serve .` (ou qualquer servidor estático na raiz).
