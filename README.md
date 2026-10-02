@@ -8,7 +8,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 ## Princípios
 
 - **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
-- **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~350 KB no desktop (a foto do hero, em AVIF, é a maior parte) e menos no celular. Rolagem 100% nativa (nunca sequestrada): nada de rolagem presa ou cena fixa.
+- **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~350 KB no desktop e bem menos no celular (a foto do hero no celular tem ~55 KB). Lighthouse no celular: 99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa (nunca sequestrada): nada de rolagem presa ou cena fixa.
 - **Movimento com propósito, só em CSS** (`transform`/`opacity`/`clip-path`): o título entra linha a linha, o cartão de avaliação se revela,
   as camadas de cada sistema se montam de baixo para cima ao aparecer, as fotos reais se revelam ao rolar, a linha de "Como funciona" se
   desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
@@ -20,6 +20,9 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 - **Só conteúdo real**: textos, endereço, telefone e avaliações vêm da própria empresa (Google). Sem produtos, preços, números ou clientes inventados.
   Fatos informados pela empresa: horário (segunda a sexta, 7h30 às 17h; sábado e domingo fechado), atendimento em Botucatu e região, 12 anos no ramo,
   garantia de 5 anos, orçamento sem taxa em Botucatu e taxa de visita fora da cidade.
+- **Horário em tempo real**: no hero, uma linha mostra se estamos em horário de atendimento (fuso de Brasília) ou quando abrimos de novo. Sem JavaScript, fica o horário fixo.
+  Se o horário mudar, ajuste em `src/js/main.js` (bloco "horário de atendimento") e no HTML.
+- **Telas grandes**: acima de 1900 px o texto e a largura do conteúdo crescem (1400 px e, acima de 2400 px, 1640 px), para o site não virar uma coluna pequena no meio.
 - **Poucos números, de propósito**: só os que ajudam a decidir (12 anos, garantia de 5 anos, nota 4,8, horário e telefone). Detalhes técnicos
   (espessuras, alturas, prazos de teste) ficam fora do site.
 - Interações só por **clique/toque/teclado** — nada depende de hover.

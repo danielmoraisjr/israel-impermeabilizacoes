@@ -44,6 +44,23 @@ if (hasIO) {
 const fab = $('.fab');
 if (fab) setTimeout(() => fab.classList.add('is-on'), 700);
 
+// ---------- horário de atendimento: em horário agora, ou quando abrimos (fuso de Brasília) ----------
+const openEl = $('#open');
+if (openEl) {
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(new Date()).map((x) => [x.type, x.value]));
+    const wd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday);
+    const min = +p.hour * 60 + +p.minute;
+    const work = wd >= 1 && wd <= 5;
+    const open = work && min >= 7 * 60 + 30 && min < 17 * 60;
+    let msg = 'Em horário de atendimento · até as 17h';
+    if (!open) msg = work && min < 7 * 60 + 30 ? 'Fora do horário · abrimos hoje às 7h30' : `Fora do horário · abrimos ${wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda'} às 7h30`;
+    openEl.classList.toggle('is-open', open);
+    $('span', openEl).textContent = msg;
+  } catch { /* sem Intl: fica o horário fixo do HTML */ }
+}
+
 // ---------- sinais de infiltração → mensagem pronta no WhatsApp ----------
 const signs = $('#signs');
 const signsCta = $('#signs-cta');

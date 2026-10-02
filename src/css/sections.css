@@ -11,6 +11,10 @@
 .hero .lead { margin-top: 28px; max-width: 32rem; color: var(--on-d); opacity: 0.88; }
 .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; margin-top: 36px; }
 .hero-help { margin-top: 18px; font-size: 0.92rem; color: var(--on-d2); }
+.open { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.92rem; color: var(--on-d2); }
+.open i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #8aa0b3; }
+.open.is-open { color: var(--on-d); }
+.open.is-open i { background: #4ade80; box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.2); }
 @keyframes up { from { transform: translateY(110%); } to { transform: none; } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 
@@ -108,7 +112,7 @@
 
 /* ================= A EMPRESA (sede real + fatos, sem cartões nem ícones) ================= */
 .emp { display: grid; gap: 40px; }
-.emp-photo { margin: 0; }
+.emp-photo { margin: 0; max-width: 30rem; }
 .emp-photo picture { display: block; }
 .emp-photo .ph { border: 1px solid var(--line); background: var(--navy-2); }
 .emp-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 0; }
@@ -119,7 +123,7 @@
 .emp-dl dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-d); }
 .emp-dl dd { font-size: 1.1rem; color: var(--text); }
 @media (min-width: 640px) { .emp-dl > div { grid-template-columns: 9rem 1fr; align-items: baseline; } }
-@media (min-width: 900px) { .emp { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(56px, 8vw, 104px); align-items: center; } }
+@media (min-width: 900px) { .emp-photo { max-width: none; } .emp { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(56px, 8vw, 104px); align-items: center; } }
 
 /* ================= ORÇAMENTO ================= */
 .orc-sec .bgimg { --veil: linear-gradient(90deg, rgba(5, 8, 12, 0.8), rgba(5, 8, 12, 0.5)); }
@@ -187,8 +191,9 @@
 .ct-grid dd a, .ct-grid dd span { display: block; }
 .ct-grid .big { font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.7rem); font-weight: 700; font-stretch: 90%; color: #fff; text-decoration: none; }
 .ct-grid .sub { margin-top: 6px; font-size: 0.95rem; color: var(--on-d2); text-decoration: none; }
+.ct-grid .tel2 { display: inline; color: #fff; font-weight: 600; text-decoration: none; }
 .ct-grid a.sub { display: inline-block; border-bottom: 1px solid var(--line-d); }
-@media (hover: hover) { .ct-grid a.big:hover { color: var(--cyan-2); } .ct-grid a.sub:hover { color: #fff; border-color: var(--cyan); } }
+@media (hover: hover) { .ct-grid .tel2:hover { color: var(--cyan-2); } .ct-grid a.big:hover { color: var(--cyan-2); } .ct-grid a.sub:hover { color: #fff; border-color: var(--cyan); } }
 @media (min-width: 900px) {
   .ct-grid { grid-template-columns: repeat(3, 1fr); }
   .ct-grid > div { padding: 32px 32px 32px 0; border-bottom: 0; }
