@@ -29,28 +29,25 @@
 .signs .btn { justify-self: start; }
 @media (min-width: 900px) { .sinais-in { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 80px; align-items: center; } }
 
-/* ================= SERVIÇOS (foto grande + lista) ================= */
-.svc-wrap { display: grid; gap: 40px; }
-.svc-photo { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--navy-2); }
-.svc-photo picture { display: block; height: 100%; }
-.svc-photo img { width: 100%; height: 100%; object-fit: cover; }
-.svc-head { margin-bottom: clamp(28px, 4vw, 44px); }
+/* ================= SERVIÇOS (quadrados com foto; ao tocar, abre o "por que fazer") ================= */
+.svc-head { max-width: 46rem; margin-bottom: clamp(28px, 4vw, 48px); }
 .svc-head .lead { margin-top: 18px; }
-.svc-list { border-top: 1px solid var(--line); }
-.svc { display: grid; gap: 14px 32px; padding: 28px 0; border-bottom: 1px solid var(--line); }
-.svc h3 { font-size: clamp(1.4rem, 1.15rem + 0.9vw, 1.8rem); }
-.svc-b { display: grid; gap: 14px; }
-.k { display: block; margin-bottom: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-d); }
-.svc p { color: var(--muted); }
-.svc .link { justify-self: start; }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile-h { font: inherit; letter-spacing: 0; line-height: 0; }
+.tile { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; overflow: hidden; background: var(--navy-2); color: #fff; text-align: left; border: 0; border-radius: 3px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.tile picture, .tile img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.tile img { transition: transform 0.6s var(--ease); }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5, 8, 12, 0.9) 0%, rgba(5, 8, 12, 0.55) 36%, rgba(5, 8, 12, 0) 64%); }
+.tile-t { position: absolute; z-index: 1; left: 14px; right: 14px; bottom: 14px; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.4rem); font-weight: 700; font-stretch: 88%; line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; }
+.tile-plus { position: absolute; z-index: 1; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--cyan); transition: transform 0.3s var(--ease); }
+.tile-plus::before, .tile-plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--ink); }
+.tile-plus::after { transform: rotate(90deg); }
+.tile:active .tile-plus { transform: scale(0.9); }
+.tile:focus-visible { outline-offset: 3px; }
+@media (hover: hover) { .tile:hover img { transform: scale(1.05); } .tile:hover .tile-plus { transform: rotate(90deg) scale(1.08); } }
 .svc-foot { margin-top: 28px; color: var(--muted); }
 .svc-foot a { color: var(--cyan-d); font-weight: 700; }
-@media (min-width: 640px) { .svc { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
-@media (min-width: 1000px) {
-  .svc-wrap { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: stretch; }
-  .svc-photo { position: relative; aspect-ratio: auto; }
-  .svc-photo picture { position: absolute; inset: 0; }
-}
+@media (min-width: 700px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); } .tile-t { left: 18px; right: 18px; bottom: 18px; } .tile-plus { top: 14px; right: 14px; } }
 
 /* ================= SISTEMAS (explicação em linguagem simples) ================= */
 .sys-grid { display: grid; gap: 24px; }

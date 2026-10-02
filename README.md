@@ -14,13 +14,17 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
   desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
 - **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
   a linha de cima dos cartões de Materiais "fecha" ao entrar, a linha de Como funciona se desenha e o brilho do logotipo (só `transform`). As fotos aparecem sem animação de revelação.
-  Em Serviços, a foto é uma faixa vertical que acompanha a altura da lista (no celular, um banner no topo). Entre seções com foto escura, a emenda é um degradê (o hero termina em preto e a seção seguinte nasce do mesmo preto), nunca um corte seco.
+  Entre seções com foto escura, a emenda é um degradê (o hero termina em preto e a seção seguinte nasce do mesmo preto), nunca um corte seco.
 - **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no Contato, interior em A empresa) são da Israel. Nas fotos da sede, as placas dos veículos foram borradas. As fotos de **ambiente** (chuva em janela: `hero-*`, `storm-*`, `house-*`, `town-*`; telhas: `telhas-*`; cobertura: `aplicacao-*`, legendada como "foto ilustrativa")
   são do Unsplash (licença livre, sem atribuição obrigatória; os créditos estão no rodapé) e **nunca** são apresentadas como obra da empresa.
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
   Cada foto de fundo sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
   o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (telhas, aplicação, obras, sede) usam qualidade maior.
   A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
+- **Serviços em quadrados** (`#servicos`): 6 quadrados com foto (2 colunas no celular, 3 no desktop). Tocar abre uma janela (`<dialog>` nativo: foco preso, Esc fecha, toque fora fecha, o botão "voltar" do celular fecha)
+  com "Por que fazer", "O que a gente faz" e o botão "Quero fazer: pedir orçamento" (WhatsApp, fixo no rodapé da janela). Sem JavaScript/`<dialog>`, o toque leva direto ao WhatsApp. Para editar um serviço, mude o quadrado e a janela `svc-<nome>` no HTML.
+  As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. Lajes e muros usam fotos de obra da Israel (legenda "Obra da Israel"); telhados, paredes, alicerces e piscinas são fotos de banco com licença livre, legendadas "Foto ilustrativa" e creditadas no rodapé
+  (alicerces é CC BY-SA 4.0: o crédito com link é obrigatório; se a foto sair, retire o crédito junto). Troque por fotos reais da Israel assim que houver.
 - **Carrosséis** (fotos da sede, avaliações e, no celular, obras): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
   Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. No desktop, as duas fotos de obras ficam lado a lado (sem botões).

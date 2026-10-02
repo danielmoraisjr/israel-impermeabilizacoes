@@ -121,6 +121,22 @@ $$('[data-car]').forEach((car) => {
   sync();
 });
 
+// ---------- serviços: tocar no quadrado abre a explicação (<dialog> nativo: foco preso, Esc fecha) ----------
+const root = document.documentElement;
+$$('[data-dlg]').forEach((btn) => btn.addEventListener('click', () => {
+  const d = document.getElementById(btn.dataset.dlg);
+  if (!d) return;
+  if (typeof d.showModal !== 'function') { const a = $('.dlg-cta a', d); if (a) window.open(a.href, '_blank', 'noopener'); return; } // navegador antigo: vai direto ao WhatsApp
+  d.showModal();
+  root.classList.add('dlg-open');
+  history.pushState({ dlg: d.id }, ''); // o botão "voltar" do celular fecha a janela em vez de sair do site
+}));
+$$('.dlg').forEach((d) => {
+  d.addEventListener('click', (e) => { if (e.target === d || e.target.closest('[data-close]')) d.close(); }); // toque fora ou em Voltar/X
+  d.addEventListener('close', () => { root.classList.remove('dlg-open'); if (history.state && history.state.dlg === d.id) history.back(); });
+});
+addEventListener('popstate', () => { const o = $('.dlg[open]'); if (o) o.close(); });
+
 // ---------- formulário → mensagem pronta no WhatsApp ----------
 const form = $('#form');
 const note = $('#form-note');
