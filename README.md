@@ -8,19 +8,19 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 ## Princípios
 
 - **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
-- **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~350 KB no desktop e bem menos no celular (a foto do hero no celular tem ~55 KB). Lighthouse no celular: 99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa (nunca sequestrada): nada de rolagem presa ou cena fixa.
+- **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~350 KB no desktop e bem menos no celular (a foto do hero no celular tem ~55 KB). Lighthouse no celular: 99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
 - **Movimento com propósito, só em CSS** (`transform`/`opacity`/`clip-path`): o título entra linha a linha, o cartão de avaliação se revela,
   as camadas de cada sistema se montam de baixo para cima ao aparecer, as fotos reais se revelam ao rolar, a linha de "Como funciona" se
   desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
-- **Dois momentos de profundidade, em CSS puro** (animação ligada à rolagem, só `transform`/`opacity`, só onde o navegador suporta — nos demais, ficam estáticos):
-  ao sair do hero a chuva desce devagar e o texto sobe e some; as fotos de obra deslizam dentro da moldura enquanto passam pela tela.
-  Nos cartões de Sistemas, a linha de cima "fecha" da esquerda para a direita (a ideia de vedar).
+- **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
+  a linha de cima dos cartões de Materiais "fecha" ao entrar, a linha de Como funciona se desenha e o brilho do logotipo (só `transform`). As fotos aparecem sem animação de revelação.
+  Em Serviços, a foto é uma faixa vertical que acompanha a altura da lista (no celular, um banner no topo). Entre seções com foto escura, a emenda é um degradê (o hero termina em preto e a seção seguinte nasce do mesmo preto), nunca um corte seco.
 - **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no Contato, interior em A empresa) são da Israel. Nas fotos da sede, as placas dos veículos foram borradas. As fotos de **ambiente** (chuva em janela: `hero-*`, `storm-*`, `house-*`, `town-*`; telhas: `telhas-*`; cobertura: `aplicacao-*`, legendada como "foto ilustrativa")
   são do Unsplash (licença livre, sem atribuição obrigatória; os créditos estão no rodapé) e **nunca** são apresentadas como obra da empresa.
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
   Cada foto de fundo sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
   o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (telhas, aplicação, obras, sede) usam qualidade maior.
-  Os efeitos de profundidade usam zoom mínimo (5–6%) para não amaciar as fotos. A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
+  A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
 - **Carrosséis** (fotos da sede, avaliações e, no celular, obras): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
   Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. No desktop, as duas fotos de obras ficam lado a lado (sem botões).

@@ -26,14 +26,12 @@
 .hdr-in { display: flex; align-items: center; gap: 28px; height: 100%; }
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
 .logo-mark { width: 46px; height: 38px; --mk-c: #00afec; --mk-k: #fff; }
-/* logotipo do topo com brilho: um reflexo cruza o símbolo de tempos em tempos */
-.mark-wrap { position: relative; display: block; width: 46px; height: 38px; flex: none; filter: drop-shadow(0 0 9px rgba(0, 175, 236, 0.4)); }
-.mark-wrap .logo-mark { width: 100%; height: 100%; }
-.shine { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
-  background: linear-gradient(170deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.28) 44%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.28) 56%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 0) 100%) 0 100% / 100% 240% no-repeat;
-  -webkit-mask: url(/assets/img/logo-mark.svg) center / contain no-repeat; mask: url(/assets/img/logo-mark.svg) center / contain no-repeat;
-  animation: sweep 6s ease-in-out 1.2s infinite; }
-@keyframes sweep { 0% { background-position: 0 100%; } 22% { background-position: 0 0%; } 44%, 100% { background-position: 0 100%; } }
+/* logotipo do topo com brilho: um reflexo cruza o símbolo de tempos em tempos (anima só transform, no processador gráfico) */
+.mark-wrap { position: relative; display: block; width: 46px; height: 38px; flex: none; }
+.mark-wrap .logo-mark { width: 100%; height: 100%; filter: drop-shadow(0 0 9px rgba(0, 175, 236, 0.4)); }
+.shine { position: absolute; inset: 0; overflow: hidden; pointer-events: none; -webkit-mask: url(/assets/img/logo-mark.svg) center / contain no-repeat; mask: url(/assets/img/logo-mark.svg) center / contain no-repeat; }
+.shine::before { content: ""; position: absolute; left: -15%; right: -15%; top: 0; height: 55%; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 100%); transform: translateY(190%) rotate(-10deg); will-change: transform; animation: sweep 6s ease-in-out 1.2s infinite; }
+@keyframes sweep { 0% { transform: translateY(190%) rotate(-10deg); } 22%, 100% { transform: translateY(-110%) rotate(-10deg); } }
 .logo-word { width: 142px; height: 38px; }
 .logo-word text { font-family: var(--font); font-weight: 800; }
 .w1 { fill: #00afec; font-size: 25px; }
