@@ -1,0 +1,85 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--hdr) + 8px);
+  interpolate-size: allow-keywords;
+}
+
+body {
+  margin: 0;
+  font: 400 1.0625rem/1.62 var(--font);
+  font-stretch: 100%;
+  color: var(--text);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+p { margin: 0; text-wrap: pretty; }
+ul, ol, dl, dd, figure { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+em { font-style: normal; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 800;
+  font-stretch: 84%;
+  letter-spacing: -0.028em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+h2 { font-size: clamp(2.2rem, 1.1rem + 4.4vw, 4.6rem); }
+h3 { font-stretch: 92%; font-weight: 700; letter-spacing: -0.018em; line-height: 1.08; }
+
+.container { width: min(var(--maxw), calc(100% - 2 * var(--gut))); margin-inline: auto; }
+
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.skip {
+  position: fixed; left: 12px; top: -64px; z-index: 300;
+  background: #fff; color: #000; padding: 10px 16px; border-radius: 2px;
+  font-weight: 700; transition: top 0.2s;
+}
+.skip:focus { top: 12px; }
+
+:focus-visible { outline: 2px solid var(--cyan-2); outline-offset: 3px; }
+.sec-paper :focus-visible, .sec-concrete :focus-visible { outline-color: var(--cyan-ink); }
+
+/* ---------- seções e ritmo de cor ---------- */
+.sec { position: relative; padding-block: clamp(84px, 11vw, 168px); }
+.sec-paper { background: var(--paper); }
+.sec-concrete { background: var(--c50); }
+.sec-ink { background: var(--ink); color: var(--on-dark); }
+.sec-deep { background: var(--deep); color: var(--on-dark); }
+
+.sec-head { max-width: 62rem; }
+.sec-head h2 { margin-top: 18px; }
+.lead { margin-top: 22px; max-width: 38rem; font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem); color: var(--muted); }
+.sec-ink .lead, .sec-deep .lead { color: var(--on-dark-2); }
+
+h2 em { color: var(--cyan-ink); }
+.sec-ink h2 em, .sec-deep h2 em, .hero h2 em { color: var(--cyan-2); }
+
+/* legenda técnica: número da prancha + título */
+.eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 0.72rem; font-weight: 600; font-stretch: 112%;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--cyan-ink);
+}
+.sec-ink .eyebrow, .sec-deep .eyebrow, .hero .eyebrow, .barrier .eyebrow { color: var(--cyan-2); }
+.eb-no { display: inline-grid; place-items: center; min-width: 2.4em; padding: 0.35em 0.5em; border: 1px solid currentColor; line-height: 1; }
+.eb-line { width: 36px; height: 1px; background: currentColor; flex: none; }
+.hide-s, .hide-xs { display: inline; }
+@media (max-width: 560px) { .hide-s { display: none; } }
+
+.stars { display: inline-flex; gap: 2px; color: #ffb800; }
+.stars svg { width: 15px; height: 15px; }
+.stars.big svg { width: 24px; height: 24px; }

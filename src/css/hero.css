@@ -1,0 +1,78 @@
+/* ---------- HERO: a casa, o arco da marca e a chuva ---------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 100svh; display: flex; align-items: center;
+  padding: calc(var(--hdr) + 36px) 0 clamp(64px, 9vh, 110px);
+  background: var(--ink); color: var(--on-dark);
+}
+/* quadriculado de prancha técnica, só onde a cena precisa de apoio */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(143, 227, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 227, 255, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(70% 80% at 72% 55%, #000, transparent 78%);
+  mask-image: radial-gradient(70% 80% at 72% 55%, #000, transparent 78%);
+}
+.hero-rain { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero-art {
+  position: absolute; z-index: 1; pointer-events: none;
+  right: -3vw; bottom: 9svh; width: min(60vw, 88svh); aspect-ratio: 1;
+}
+.hero-svg { width: 100%; height: 100%; overflow: visible; }
+
+.hero-in { position: relative; z-index: 2; }
+.hero-eyebrow { margin-bottom: clamp(18px, 3vh, 30px); }
+
+.hero-title { font-size: clamp(2.9rem, min(0.7rem + 7vw, 14svh), 8.2rem); font-stretch: 88%; line-height: 0.92; letter-spacing: -0.022em; color: #fff; }
+.hero-title .ln { display: block; overflow: hidden; padding: 0.04em 0 0.1em; margin: -0.04em 0 -0.1em; }
+.hero-title .ln-in { display: block; animation: ln-in 1.15s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(0.1s + var(--i, 0) * 0.11s); }
+@keyframes ln-in { from { transform: translateY(115%); } to { transform: none; } }
+.hero-title .dim { color: #7f9bb0; }
+
+.hero-lead { max-width: 36rem; margin-top: clamp(22px, 3.2vh, 34px); font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.2rem); color: var(--on-dark-2); }
+.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; margin-top: clamp(26px, 4vh, 40px); }
+.hero-cta .link-arrow { color: var(--on-dark); }
+
+.hero-facts {
+  display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: clamp(28px, 5vh, 52px); padding-top: 18px;
+  max-width: 48rem; border-top: 1px solid var(--hair-dark);
+  font-size: 0.9rem; font-weight: 500; color: var(--on-dark-2);
+}
+.hero-facts li { display: inline-flex; align-items: center; gap: 8px; }
+.hero-facts b { color: #fff; font-weight: 700; }
+.hero-facts small { font-size: inherit; color: inherit; }
+
+.hero-scroll {
+  position: absolute; z-index: 2; left: var(--gut); bottom: 22px; display: none; align-items: center; gap: 12px;
+  font-size: 0.66rem; font-weight: 600; font-stretch: 112%; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--on-dark-2); text-decoration: none;
+}
+.hero-scroll i { position: relative; width: 1px; height: 38px; background: var(--hair-dark); overflow: hidden; }
+.hero-scroll i::after { content: ""; position: absolute; inset: 0; background: var(--cyan-2); transform: translateY(-100%); animation: scrollcue 2.4s var(--ease-io) infinite; }
+@keyframes scrollcue { 0% { transform: translateY(-100%); } 55%, 100% { transform: translateY(100%); } }
+@media (min-width: 1001px) and (min-height: 700px) { .hero-scroll { display: flex; } }
+
+/* celular: o texto vem primeiro e a casa protegida ocupa a base */
+@media (max-width: 1000px) {
+  .hero { flex-direction: column; align-items: stretch; min-height: 100svh; padding: calc(var(--hdr) + 22px) 0 26px; }
+  .hero-in { flex: 1; display: flex; flex-direction: column; }
+  .hero-art { right: auto; left: 50%; width: min(120vw, 720px); bottom: -6svh; transform: translateX(-50%); }
+  .hero-title { font-size: clamp(2.5rem, 0.9rem + 8.6vw, 6rem); }
+  .hero-lead { max-width: 36rem; }
+  .hero-facts { margin-top: auto; border-top: 0; padding-top: 20px; }
+}
+@media (max-width: 560px) {
+  .hero-art { width: 134vw; bottom: 2svh; }
+  .hide-xs { display: none; }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-lead { margin-top: 18px; font-size: 0.98rem; line-height: 1.5; }
+  .hero-cta { margin-top: 22px; }
+  .hero-cta .btn { width: 100%; min-height: 58px; }
+  .hero-cta .btn-t { flex: 1; }
+  .hero-cta .link-arrow { display: none; }
+  .hero-facts { gap: 4px 16px; font-size: 0.8rem; }
+  .hero-facts li:nth-child(n + 3) { display: none; }
+}
+@media (max-height: 640px) and (max-width: 560px) { .hero-lead { display: none; } }

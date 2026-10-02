@@ -1,0 +1,18 @@
+/* ---------- estados iniciais só existem com JavaScript; o resto é conteúdo normal ---------- */
+.js [data-gated] { visibility: hidden; }
+.js.ready [data-gated], .failsafe [data-gated] { visibility: visible; }
+
+.js .eyebrow .eb-line { transform-origin: 0 50%; }
+
+/* máscara de linha dos títulos (SplitText) */
+.split-line-mask { overflow: hidden; }
+
+/* ---------- movimento reduzido: sem animação, tudo visível e legível ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important;
+  }
+  .hero-scroll i::after, .rainfall i, .s-water path { animation: none !important; }
+  .rainfall i { opacity: 0.5; }
+}
