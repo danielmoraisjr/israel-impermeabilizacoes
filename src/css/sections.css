@@ -106,6 +106,21 @@
   .step::before { top: 0; }
 }
 
+/* ================= A EMPRESA (sede real + fatos, sem cartões nem ícones) ================= */
+.emp { display: grid; gap: 40px; }
+.emp-photo { margin: 0; }
+.emp-photo picture { display: block; }
+.emp-photo .ph { border: 1px solid var(--line); background: var(--navy-2); }
+.emp-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 0; }
+.emp-photo figcaption { margin-top: 12px; font-size: 0.9rem; color: var(--muted); }
+.emp .lead { margin-top: 18px; }
+.emp-dl { margin: 30px 0 28px; border-top: 1px solid var(--line); }
+.emp-dl > div { display: grid; gap: 4px 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.emp-dl dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-d); }
+.emp-dl dd { font-size: 1.1rem; color: var(--text); }
+@media (min-width: 640px) { .emp-dl > div { grid-template-columns: 9rem 1fr; align-items: baseline; } }
+@media (min-width: 900px) { .emp { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(56px, 8vw, 104px); align-items: center; } }
+
 /* ================= ORÇAMENTO ================= */
 .orc-sec .bgimg { --veil: linear-gradient(90deg, rgba(5, 8, 12, 0.8), rgba(5, 8, 12, 0.5)); }
 .orc { display: grid; gap: 40px; }
@@ -142,7 +157,14 @@
 .contato .lead { margin-top: 22px; }
 .ct-cta { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-top: 34px; }
 
-.mapbox { position: relative; margin-top: clamp(44px, 6vw, 72px); border: 1px solid var(--line-d); background: var(--navy-2); }
+.ct-where { display: grid; gap: 28px; margin-top: clamp(44px, 6vw, 72px); }
+.ct-photo { margin: 0; }
+.ct-photo picture { display: block; }
+.ct-photo .ph { border: 1px solid var(--line-d); background: var(--navy-2); }
+.ct-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 14%; }
+@media (min-width: 560px) { .ct-photo img { aspect-ratio: 5 / 4; object-position: 50% 10%; } }
+.ct-photo figcaption { margin-top: 12px; font-size: 0.92rem; color: var(--on-d2); }
+.mapbox { position: relative; border: 1px solid var(--line-d); background: var(--navy-2); }
 .mapbox iframe { display: block; width: 100%; height: 340px; border: 0; filter: invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.92); }
 .mapcard { display: grid; gap: 14px; padding: 24px; background: var(--ink); border-top: 1px solid var(--line-d); }
 .mapcard .mark { width: 52px; height: 43px; --mk-c: #00afec; --mk-k: #fff; }
@@ -150,8 +172,13 @@
 .mapcard p { color: var(--on-d2); }
 .mapcard-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
 @media (min-width: 900px) {
-  .mapbox iframe { height: 540px; }
-  .mapcard { position: absolute; left: 28px; bottom: 28px; width: min(380px, calc(100% - 56px)); padding: 28px; border: 1px solid var(--line-d); }
+  /* foto da fachada e mapa lado a lado; o cartão do endereço fica sob o mapa e a foto acompanha a altura dele */
+  .ct-where { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: stretch; }
+  .ct-photo { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+  .ct-photo .ph { position: relative; min-height: 0; }
+  .ct-photo picture { position: absolute; inset: 0; }
+  .ct-photo img { height: 100%; aspect-ratio: auto; object-position: 50% 30%; }
+  .mapbox iframe { height: 360px; }
 }
 
 .ct-grid { display: grid; margin-top: clamp(36px, 5vw, 56px); border-top: 1px solid var(--line-d); }
@@ -193,7 +220,7 @@
 /* a foto desliza dentro da moldura enquanto passa pela tela (só onde há animação ligada à rolagem) */
 @keyframes drift { from { transform: translateY(-5%) scale(1.12); } to { transform: translateY(5%) scale(1.12); } }
 @supports (animation-timeline: view()) {
-  .arch picture { animation: drift linear both; animation-timeline: view(); animation-range: cover; }
+  .arch picture, .emp-photo picture { animation: drift linear both; animation-timeline: view(); animation-range: cover; }
 }
 
 @media (max-width: 560px) {

@@ -36,7 +36,7 @@ if (hasIO) {
   const links = $$('.nav a');
   const set = (id) => links.forEach((l) => (l.getAttribute('href') === `#${id}` ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
   const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-45% 0px -50% 0px' });
-  ['servicos', 'sistemas', 'obras', 'como-funciona', 'avaliacoes', 'contato'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+  ['servicos', 'sistemas', 'como-funciona', 'obras', 'empresa', 'avaliacoes', 'contato'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   new IntersectionObserver(([e]) => { if (e.isIntersecting) set(''); }, { rootMargin: '-45% 0px -50% 0px' }).observe($('#inicio'));
 }
 
