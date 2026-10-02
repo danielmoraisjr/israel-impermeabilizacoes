@@ -17,6 +17,10 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
   Nos cartões de Sistemas, a linha de cima "fecha" da esquerda para a direita (a ideia de vedar).
 - **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no Contato, interior em A empresa) são da Israel. Nas fotos da sede, as placas dos veículos foram borradas. As fotos de **ambiente** (chuva em janela: `hero-*`, `storm-*`, `house-*`, `town-*`; telhas: `telhas-*`; cobertura: `aplicacao-*`, legendada como "foto ilustrativa")
   são do Unsplash (licença livre, sem atribuição obrigatória; os créditos estão no rodapé) e **nunca** são apresentadas como obra da empresa.
+- **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
+  Cada foto de fundo sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
+  o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (telhas, aplicação, obras, sede) usam qualidade maior.
+  Os efeitos de profundidade usam zoom mínimo (5–6%) para não amaciar as fotos. A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
 - **Só conteúdo real**: textos, endereço, telefone e avaliações vêm da própria empresa (Google). Sem produtos, preços, números ou clientes inventados.
   Fatos informados pela empresa: horário (segunda a sexta, 7h30 às 17h; sábado e domingo fechado), atendimento em Botucatu e região, 12 anos no ramo,
   garantia de 5 anos, orçamento sem taxa em Botucatu e taxa de visita fora da cidade.

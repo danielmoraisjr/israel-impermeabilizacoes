@@ -20,7 +20,7 @@
 
 /* profundidade ao sair do hero: a chuva (fundo) desce devagar e o texto sobe mais rápido e some.
    Só em navegadores com animação ligada à rolagem; nos outros, o hero fica parado. */
-@keyframes hero-bg { from { transform: scale(1.14) translateY(0); } to { transform: scale(1.14) translateY(5%); } }
+@keyframes hero-bg { from { transform: scale(1.06) translateY(0); } to { transform: scale(1.06) translateY(3%); } }
 @keyframes hero-fg { 55% { opacity: 1; } to { transform: translateY(-56px); opacity: 0; } }
 @supports (animation-timeline: scroll()) {
   .hero .bgimg img { animation: fade-in 1.4s ease both, hero-bg linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0px 100svh; }
@@ -223,7 +223,7 @@
 .arch-b.rv .ph, .sys + .sys.rv::before { transition-delay: 0.14s; }
 
 /* a foto desliza dentro da moldura enquanto passa pela tela (só onde há animação ligada à rolagem) */
-@keyframes drift { from { transform: translateY(-5%) scale(1.12); } to { transform: translateY(5%) scale(1.12); } }
+@keyframes drift { from { transform: translateY(-2.4%) scale(1.05); } to { transform: translateY(2.4%) scale(1.05); } }
 @supports (animation-timeline: view()) {
   .arch picture, .emp-photo picture { animation: drift linear both; animation-timeline: view(); animation-range: cover; }
 }
