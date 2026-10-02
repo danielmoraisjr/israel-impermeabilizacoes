@@ -7,9 +7,8 @@ const NOTES = {
   off: 'Sem a barreira, a água entra: o telhado encharca, a calha transborda e nasce a goteira.',
 };
 
-function webgl() {
-  try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
-}
+// sem criar contexto à toa: a prova real é o mount (que cai no pôster se falhar ou se o GL for por software)
+const webgl = () => 'WebGL2RenderingContext' in window;
 
 export function initHero({ gsap }) {
   const hero = $('[data-hero]');
@@ -60,7 +59,7 @@ export function initHero({ gsap }) {
     s.src = stage.dataset.houseSrc; s.async = true;
     s.onload = () => {
       try {
-        ctrl = window.IsraelHouse.mount(mount, { weather: want.weather, barrier: want.barrier });
+        ctrl = window.IsraelHouse.mount(mount, { weather: want.weather, barrier: want.barrier, force: /[?&]gl=force/.test(location.search) });
       } catch (err) { stage.classList.add('is-static'); return; }
       ctrl.onFlash((v) => stage.style.setProperty('--flash', v.toFixed(3)));
       watchVisible(hero, (v) => ctrl.setActive(v), '0px');

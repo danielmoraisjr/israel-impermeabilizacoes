@@ -3,7 +3,7 @@
 import { chromium } from 'playwright';
 import sharp from 'sharp';
 
-const URL = process.env.URL || 'http://localhost:4173/';
+const URL = process.env.URL || 'http://localhost:4173/?gl=force';
 const browser = await chromium.launch({ args: ['--no-sandbox', '--use-angle=swiftshader', '--use-gl=angle', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const page = await (await browser.newContext({ viewport: { width: 1700, height: 1000 }, deviceScaleFactor: 1 })).newPage();
 await page.goto(URL, { waitUntil: 'load' });

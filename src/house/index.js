@@ -21,6 +21,12 @@ function mount(container, opts = {}) {
   renderer.toneMapping = ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = !small; renderer.shadowMap.type = PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
+  // GL por software (sem placa de vídeo) não sustenta a cena: cai no pôster
+  if (!opts.force) {
+    const gl = renderer.getContext(), ext = gl.getExtension('WEBGL_debug_renderer_info');
+    const name = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
+    if (/swiftshader|llvmpipe|software|softpipe/i.test(name)) { renderer.dispose(); throw new Error('software-gl'); }
+  }
   const el = renderer.domElement; el.className = 'house-canvas'; el.setAttribute('aria-hidden', 'true');
   container.appendChild(el);
 
