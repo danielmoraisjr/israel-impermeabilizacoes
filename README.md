@@ -55,4 +55,6 @@ Para ver localmente: `python3 -m http.server 4173` (ou qualquer servidor estáti
 - **Cores e fonte**: variáveis no topo de `src/css/base.css`. Fonte única: Archivo (peso 400–800, largura 80–100%), em `assets/fonts/`.
 - **E-mail**: não há e-mail confirmado, por isso ele não aparece. Para incluir, adicione em `#contato` (bloco `.ct-grid`) e no rodapé.
 - **Fotos de obras**: coloque em `assets/img/` (WebP, com `width`/`height`) e inclua em `#obras` no mesmo formato das atuais.
-  As duas fotos atuais chegaram com só 384×288 px; foram ampliadas 4× com super-resolução (EDSR) para ficarem mais nítidas, mas o ideal é trocar pelos originais.
+  As duas fotos atuais chegaram com só 384×288 px (os arquivos originais estão no histórico do git, commit `3953801`). Foram ampliadas 4× com o modelo de
+  super-resolução Swin2SR (versão "realworld", em ONNX, feita para fotos reais comprimidas: limpa os artefatos sem inventar detalhes). Mesmo assim, o ideal é trocar pelos originais.
+  As fotos da sede chegaram pelo WhatsApp (já comprimidas) e passaram pela mesma limpeza, a partir de uma versão reduzida pela metade.
