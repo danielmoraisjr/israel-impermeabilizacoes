@@ -7,7 +7,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 
 ## Princípios
 
-- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (e o botão flutuante do WhatsApp).
+- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
 - **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~190 KB. Rolagem 100% nativa, sem efeitos ligados à rolagem.
 - **Movimento com propósito, só em CSS** (`transform`/`opacity`/`clip-path`): o título entra linha a linha, o cartão de avaliação se revela,
   as camadas de cada sistema se montam de baixo para cima ao aparecer, as fotos reais se revelam ao rolar, a linha de "Como funciona" se
@@ -47,4 +47,4 @@ Para ver localmente: `python3 -m http.server 4173` (ou qualquer servidor estáti
 - **Cores e fonte**: variáveis no topo de `src/css/base.css`. Fonte única: Archivo (peso 400–800, largura 80–100%), em `assets/fonts/`.
 - **E-mail**: não há e-mail confirmado, por isso ele não aparece. Para incluir, adicione em `#contato` (bloco `.ct-grid`) e no rodapé.
 - **Fotos de obras**: coloque em `assets/img/` (WebP, com `width`/`height`) e inclua em `#obras` no mesmo formato das atuais.
-  As duas fotos atuais têm só 384×288 px: quando houver originais em alta resolução, troque-as e dá para criar um hero com foto de obra.
+  As duas fotos atuais chegaram com só 384×288 px; foram ampliadas 4× com super-resolução (EDSR) para ficarem mais nítidas, mas o ideal é trocar pelos originais.

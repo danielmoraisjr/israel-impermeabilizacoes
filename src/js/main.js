@@ -40,20 +40,9 @@ if (hasIO) {
   new IntersectionObserver(([e]) => { if (e.isIntersecting) set(''); }, { rootMargin: '-45% 0px -50% 0px' }).observe($('#inicio'));
 }
 
-// ---------- botões flutuantes: fora do hero, do formulário e do contato ----------
+// ---------- botão flutuante do WhatsApp: aparece logo depois que a página abre ----------
 const fab = $('.fab');
-const dock = $('.dock');
-if ((fab || dock) && hasIO) {
-  const busy = new Set();
-  const sync = () => [fab, dock].forEach((el) => el && el.classList.toggle('is-on', busy.size === 0));
-  const watch = (sel, min) => {
-    const el = $(sel);
-    if (!el) return;
-    new IntersectionObserver(([e]) => { e.intersectionRatio >= min ? busy.add(sel) : busy.delete(sel); sync(); }, { threshold: [0, 0.1, 0.25, 0.5] }).observe(el);
-  };
-  watch('#inicio', 0.25); watch('#orcamento', 0.1); watch('.foot', 0.1);
-  watch('#contato', 0.1);
-}
+if (fab) setTimeout(() => fab.classList.add('is-on'), 700);
 
 // ---------- sinais de infiltração → mensagem pronta no WhatsApp ----------
 const signs = $('#signs');

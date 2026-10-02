@@ -26,6 +26,7 @@
 /* ================= SERVIÇOS (foto grande + lista) ================= */
 .svc-wrap { display: grid; gap: 40px; }
 .svc-photo { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--navy-2); }
+.svc-photo picture { display: block; height: 100%; }
 .svc-photo img { width: 100%; height: 100%; object-fit: cover; }
 .svc-head { margin-bottom: clamp(28px, 4vw, 44px); }
 .svc-head .lead { margin-top: 18px; }
@@ -44,33 +45,24 @@
   .svc-photo { position: sticky; top: calc(var(--hdr) + 28px); aspect-ratio: auto; height: min(80vh, 700px); }
 }
 
-/* ================= SISTEMAS ================= */
+/* ================= SISTEMAS (explicação em linguagem simples) ================= */
 .sys-grid { display: grid; gap: 24px; }
-.sys { display: grid; align-content: start; gap: 18px; padding: clamp(22px, 3vw, 36px); background: var(--navy-2); border: 1px solid var(--line-d); border-radius: 3px; }
-.sys header { display: grid; gap: 6px; }
-.sys header p { color: var(--on-d2); font-size: 0.95rem; }
-.sys h3 { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem); color: #fff; }
-.stk { display: grid; gap: 2px; margin: 4px 0; }
-.stk li { display: flex; align-items: center; min-height: 40px; padding: 0 14px; font-size: 0.85rem; font-weight: 600; background: #c4ced6; color: var(--text); }
-.stk .s-top { background: #e7edf1; }
-.stk .s-mid { background: #8d99a3; }
-.stk .s-bar { background: var(--ink); color: var(--cyan-2); box-shadow: inset 0 3px 0 var(--cyan); }
-.stk .s-d { background: var(--cyan-d); color: #fff; }
-.stk .s-primer { background: #2a3946; color: #fff; }
-.stk .s-base { min-height: 60px; background: #55626d; color: #fff; }
-.sys p.how { color: var(--on-d2); }
-.sys p.how b { color: #fff; font-weight: 600; }
+.sys { padding: clamp(26px, 3.4vw, 44px); background: var(--navy-2); border: 1px solid var(--line-d); border-top: 3px solid var(--cyan); border-radius: 3px; }
+.sys h3 { font-size: clamp(1.7rem, 1.3rem + 1.3vw, 2.4rem); color: #fff; }
+.sys-for { margin-top: 8px; color: var(--cyan-2); font-weight: 600; }
+.sys-dl { display: grid; margin-top: 26px; border-top: 1px solid var(--line-d); }
+.sys-dl > div { display: grid; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--line-d); }
+.sys-dl dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-d2); }
+.sys-dl dd { color: var(--on-d); font-size: 1.05rem; line-height: 1.55; }
+@media (min-width: 640px) { .sys-dl > div { grid-template-columns: 8.5rem 1fr; gap: 24px; } }
 @media (min-width: 900px) { .sys-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
-.sys.rv .stk li { opacity: 0; }
-.sys.rv.in .stk li { animation: lay-up 0.65s var(--ease) both; animation-delay: calc(var(--k) * 0.13s); }
-.stk li:nth-child(5) { --k: 0; } .stk li:nth-child(4) { --k: 1; } .stk li:nth-child(3) { --k: 2; } .stk li:nth-child(2) { --k: 3; } .stk li:nth-child(1) { --k: 4; }
-@keyframes lay-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
 /* ================= OBRAS ================= */
 .obras-in { display: grid; gap: 44px; align-items: start; }
 .obras h2 { color: #fff; }
 .obras .lead { margin: 18px 0 26px; }
 .arch-grid { display: grid; gap: 32px 24px; }
+.arch picture { display: block; }
 .arch img { width: 100%; height: auto; border: 1px solid var(--line-d); background: var(--navy-2); }
 .arch figcaption { margin-top: 12px; font-size: 0.92rem; color: var(--on-d2); }
 .arch figcaption b { color: #fff; font-weight: 600; }
@@ -79,6 +71,7 @@
 
 /* ================= COMO FUNCIONA ================= */
 .wide { margin: 0 0 clamp(44px, 6vw, 80px); }
+.wide picture { display: block; }
 .wide .ph img { width: 100%; height: clamp(220px, 34vw, 420px); object-fit: cover; }
 .wide figcaption { margin-top: 10px; font-size: 0.82rem; color: var(--muted); }
 .proc { position: relative; display: grid; gap: 32px; }
@@ -195,7 +188,6 @@
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rv .ph { clip-path: none; }
   .rv .ph img { transform: none; }
-  .sys.rv .stk li { opacity: 1; }
   .proc::after { transform: none; }
   .step::before { background: var(--cyan-d); }
 }
