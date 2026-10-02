@@ -96,7 +96,7 @@ export function initNav({ ScrollTrigger }) {
   const setCurrent = (id) => links.forEach((l) => {
     if (l.getAttribute('href') === `#${id}`) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
   });
-  ['barreira', 'servicos', 'como-funciona', 'avaliacoes', 'contato'].forEach((id) => {
+  ['servicos', 'obras', 'como-funciona', 'avaliacoes', 'contato'].forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     ScrollTrigger.create({ trigger: el, start: 'top 45%', end: 'bottom 45%', onToggle: (s) => s.isActive && setCurrent(id) });
@@ -104,13 +104,12 @@ export function initNav({ ScrollTrigger }) {
   ScrollTrigger.create({ trigger: '#inicio', start: 'top top', end: 'bottom 45%', onToggle: (s) => s.isActive && setCurrent('') });
 
   // ---- botões flutuantes: depois do hero, fora da cena fixa e do formulário ----
-  const flags = { past: false, end: new Set(), scene: false };
+  const flags = { past: false, end: new Set() };
   const syncFloat = () => {
-    const show = flags.past && !flags.end.size && !flags.scene;
+    const show = flags.past && !flags.end.size;
     fab?.classList.toggle('is-on', show);
     dock?.classList.toggle('is-on', show);
   };
-  ScrollTrigger.create({ trigger: '#barreira', start: 'top 70%', end: 'bottom 30%', onToggle: (s) => { flags.scene = s.isActive; syncFloat(); } });
   ScrollTrigger.create({ trigger: '#inicio', start: 'bottom 70%', onToggle: (s) => { flags.past = s.isActive || s.progress === 1; syncFloat(); }, onLeaveBack: () => { flags.past = false; syncFloat(); }, end: 'max' });
   // do formulário até o fim da página os botões flutuantes saem de cena
   ScrollTrigger.create({ trigger: '#orcamento', start: 'top 85%', endTrigger: 'main', end: 'bottom bottom', onToggle: (s) => { s.isActive ? flags.end.add('fim') : flags.end.delete('fim'); syncFloat(); } });

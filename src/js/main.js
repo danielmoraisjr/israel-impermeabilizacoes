@@ -5,11 +5,10 @@ import { SplitText } from 'gsap/SplitText';
 
 import { initUI, initNav } from './modules/ui.js';
 import { initHero } from './modules/hero.js';
-import { initBarrier } from './modules/barrier.js';
 import { initSigns } from './modules/signs.js';
 import { initServices } from './modules/services.js';
 import { initSystems, initProcess, initProof, initHeadings } from './modules/sections.js';
-import { initForm, initMap } from './modules/forms.js';
+import { initForm } from './modules/forms.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -26,11 +25,9 @@ function start() {
   initSigns();
   initServices(ctx);
   initForm();
-  initMap();
 
   // 2) o resto em tarefas curtas, depois da primeira pintura (evita travar a thread principal)
   const stages = [
-    () => initBarrier(ctx),
     () => { initSystems(ctx); initProcess(ctx); initProof(ctx); },
     () => initHeadings(ctx),
     () => initNav(ctx), // por último: depende da posição final das seções fixadas

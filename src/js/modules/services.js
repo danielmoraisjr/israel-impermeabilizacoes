@@ -1,5 +1,5 @@
 // SERVIÇOS — prancha técnica: escolher um serviço desenha o corte e aplica a barreira.
-// Em telas largas é uma lista + prancha (passar o mouse já troca); no celular vira acordeão.
+// Em telas largas é uma lista + prancha; no celular vira acordeão. Só muda com clique ou toque.
 import { $, $$, mq, reduceMotion } from '../lib/dom.js';
 
 export function initServices({ gsap, ScrollTrigger }) {
@@ -41,14 +41,6 @@ export function initServices({ gsap, ScrollTrigger }) {
   items.forEach((it, i) => {
     const btn = $('.svc-btn', it);
     btn.addEventListener('click', () => (wide.matches ? open(i) : open(i, { toggle: true })));
-    // mouse: passar por cima já mostra o serviço
-    let t;
-    btn.addEventListener('pointerenter', (e) => {
-      if (e.pointerType !== 'mouse' || !wide.matches) return;
-      clearTimeout(t);
-      t = setTimeout(() => open(i), 90);
-    });
-    btn.addEventListener('pointerleave', () => clearTimeout(t));
     btn.addEventListener('keydown', (e) => {
       if (!wide.matches || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
       e.preventDefault();

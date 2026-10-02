@@ -45,18 +45,3 @@ export function initForm() {
   });
   form.addEventListener('input', (e) => e.target.closest('.fld')?.classList.remove('err'));
 }
-
-export function initMap() {
-  const map = $('#map');
-  const btn = map && $('.map-btn', map);
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const f = document.createElement('iframe');
-    f.src = map.dataset.src;
-    f.title = 'Mapa: Israel Impermeabilizações, R. Paulo Francisco de Barros, Botucatu – SP';
-    f.loading = 'lazy';
-    f.referrerPolicy = 'no-referrer-when-downgrade';
-    f.allowFullscreen = true;
-    map.replaceChildren(f);
-  });
-}
