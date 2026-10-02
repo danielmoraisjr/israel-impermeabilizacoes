@@ -9,11 +9,11 @@
 }
 
 :root {
-  --ink: #040f1a;
-  --navy: #071a2b;
-  --navy-2: #0b2540;
-  --navy-3: #12365a;
-  --paper: #eef3f6;
+  --ink: #05080c;
+  --navy: #08121c;
+  --navy-2: #0d1c2c;
+  --navy-3: #13283d;
+  --paper: #f3f5f7;
   --text: #0b1a28;
   --muted: #4a5d6c;
   --cyan: #00afec;
@@ -41,8 +41,8 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 [hidden] { display: none !important; }
 
-h1, h2, h3 { font-weight: 800; font-stretch: 86%; letter-spacing: -0.015em; line-height: 1.02; text-wrap: balance; }
-h2 { font-size: clamp(2.1rem, 1.2rem + 3.6vw, 3.8rem); }
+h1, h2, h3 { font-weight: 700; font-stretch: 88%; letter-spacing: -0.02em; line-height: 1.04; text-wrap: balance; }
+h2 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.5rem); }
 h3 { font-size: 1.25rem; font-stretch: 92%; line-height: 1.15; letter-spacing: -0.005em; }
 p { text-wrap: pretty; }
 em { font-style: normal; color: var(--cyan-2); }
@@ -58,7 +58,7 @@ em { font-style: normal; color: var(--cyan-2); }
 .eyebrow + h2, .eyebrow + h1 { margin-top: 16px; }
 .lead { max-width: 38rem; font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem); color: var(--on-d2); }
 
-.sec { position: relative; isolation: isolate; padding-block: clamp(76px, 10vw, 140px); }
+.sec { position: relative; isolation: isolate; padding-block: clamp(80px, 11vw, 152px); }
 .sec-head { display: grid; gap: 16px 64px; margin-bottom: clamp(36px, 5vw, 68px); }
 @media (min-width: 900px) { .sec-head { grid-template-columns: 6fr 5fr; align-items: end; } }
 
@@ -73,4 +73,4 @@ em { font-style: normal; color: var(--cyan-2); }
 /* foto de ambiente por trás de uma seção (decorativa; o texto vem por cima de um véu azul) */
 .bgimg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .bgimg img { width: 100%; height: 100%; object-fit: cover; }
-.bgimg::after { content: ""; position: absolute; inset: 0; background: var(--veil, rgba(7, 26, 43, 0.86)); }
+.bgimg::after { content: ""; position: absolute; inset: 0; background: var(--veil, rgba(5, 8, 12, 0.86)); }
