@@ -91,22 +91,15 @@
 
 /* ================= A EMPRESA (carrossel quadrado: obras primeiro, depois a sede) ================= */
 .emp { display: grid; gap: 36px; }
-.emp-photo { max-width: 34rem; }
-.emp-photo picture { display: block; }
-.emp-photo .ph { border: 1px solid var(--line); background: var(--navy-2); }
-.emp-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-.emp-photo figcaption { margin-top: 12px; min-height: 2.7em; font-size: 0.92rem; color: var(--muted); }
-.emp-photo figcaption b { color: var(--text); font-weight: 700; }
-.emp-photo .car-ui { margin-top: 8px; color: var(--cyan-d); }
 .emp .lead { margin-top: 18px; }
-.emp-dl { margin: 28px 0 24px; border-top: 1px solid var(--line); }
+.emp-dl { margin: 0 0 24px; border-top: 1px solid var(--line); }
 .emp-dl > div { display: grid; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .emp-dl dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-d); }
 .emp-dl dd { font-size: 1.1rem; color: var(--text); }
 .emp-links { display: flex; flex-wrap: wrap; gap: 14px 28px; }
 @media (min-width: 640px) { .emp-dl > div { grid-template-columns: 9rem 1fr; align-items: baseline; } }
-@media (min-width: 900px) { .emp-photo { max-width: none; } .emp { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(48px, 7vw, 96px); align-items: center; } }
-
+@media (min-width: 900px) { .emp { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(48px, 7vw, 96px); align-items: center; } }
+@media (min-width: 900px) { 
 /* ================= ORÇAMENTO E CONTATO (um fechamento só: contato à esquerda, formulário à direita) ================= */
 .orc { display: grid; gap: 36px; }
 .orc h2 { color: #fff; }
