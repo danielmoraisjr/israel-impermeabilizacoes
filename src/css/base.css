@@ -58,8 +58,8 @@ em { font-style: normal; color: var(--cyan-2); }
 .eyebrow + h2, .eyebrow + h1 { margin-top: 16px; }
 .lead { max-width: 38rem; font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem); color: var(--on-d2); }
 
-.sec { position: relative; isolation: isolate; padding-block: clamp(80px, 11vw, 152px); }
-.sec-head { display: grid; gap: 16px 64px; margin-bottom: clamp(36px, 5vw, 68px); }
+.sec { position: relative; isolation: isolate; padding-block: clamp(64px, 8vw, 112px); }
+.sec-head { display: grid; gap: 16px 64px; margin-bottom: clamp(28px, 4vw, 52px); }
 @media (min-width: 900px) { .sec-head { grid-template-columns: 6fr 5fr; align-items: end; } }
 
 /* superfícies */

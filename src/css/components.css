@@ -91,15 +91,16 @@ body.menu-open { overflow: hidden; }
 .form-note.is-err { color: #b3261e; }
 .form-note a { color: var(--cyan-d); font-weight: 700; }
 
-.checks { margin: 0; padding: 0; border: 0; display: grid; gap: 10px; }
-.chk { position: relative; display: flex; align-items: center; gap: 14px; min-height: 54px; padding: 10px 16px; border: 1.5px solid rgba(255, 255, 255, 0.28); border-radius: 3px; background: rgba(4, 15, 26, 0.45); cursor: pointer; font-size: 1.02rem; transition: border-color 0.2s, background-color 0.2s; -webkit-tap-highlight-color: transparent; }
-.chk input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.chk::before { content: ""; flex: none; width: 22px; height: 22px; border: 1.5px solid rgba(255, 255, 255, 0.6); border-radius: 2px; background: transparent center / 15px no-repeat; transition: background-color 0.15s, border-color 0.15s; }
-.chk:has(input:checked) { border-color: var(--cyan); background: rgba(0, 175, 236, 0.16); }
-.chk:has(input:checked)::before { background-color: var(--cyan); border-color: var(--cyan); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23040f1a' stroke-width='3.4' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E"); animation: pop 0.25s var(--ease); }
-.chk:has(input:focus-visible) { outline: 3px solid var(--cyan); outline-offset: 2px; }
-@keyframes pop { 0% { transform: scale(0.8); } 60% { transform: scale(1.12); } 100% { transform: none; } }
-@media (hover: hover) { .chk:hover { border-color: rgba(255, 255, 255, 0.6); } }
+.chips { min-width: 0; margin: 0; padding: 0; border: 0; }
+.chips legend { padding: 0; margin-bottom: 8px; font-size: 0.9rem; font-weight: 700; }
+.chips legend em { font-weight: 400; color: var(--muted); }
+.chips-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; background: #fff; border: 1.5px solid #b9c4cc; border-radius: 3px; font-size: 0.95rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; -webkit-tap-highlight-color: transparent; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip:has(input:checked) { border-color: var(--cyan-d); background: rgba(0, 175, 236, 0.12); font-weight: 700; }
+.chip:has(input:checked)::before { content: ""; flex: none; width: 14px; height: 14px; margin-right: 8px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%230a6da3' stroke-width='3.4' d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat; }
+.chip:has(input:focus-visible) { outline: 3px solid var(--cyan); outline-offset: 2px; }
+@media (hover: hover) { .chip:hover { border-color: var(--cyan-d); } }
 
 /* ---------- carrossel: rolagem nativa com encaixe; botões e pontos (criados pelo JS) só somam comodidade ---------- */
 .car { position: relative; min-width: 0; max-width: 100%; }

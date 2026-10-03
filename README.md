@@ -8,26 +8,28 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 ## Princípios
 
 - **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
-- **Leve e fluido**: ~21 KB de CSS, ~4 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~350 KB no desktop e bem menos no celular (a foto do hero no celular tem ~55 KB). Lighthouse no celular: 99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
-- **Movimento com propósito, só em CSS** (`transform`/`opacity`/`clip-path`): o título entra linha a linha, o cartão de avaliação se revela,
-  as camadas de cada sistema se montam de baixo para cima ao aparecer, as fotos reais se revelam ao rolar, a linha de "Como funciona" se
-  desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
+- **Página curta, de propósito**: 7 seções (hero · serviços · como funciona · a empresa · avaliações · dúvidas · contato), ≈ 9–10 telas no total (antes eram ≈ 15). Tudo que repetia informação foi fundido ou cortado.
+- **Leve e fluido**: ~25 KB de CSS, ~5,5 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~750 KB no desktop e bem menos no celular. Lighthouse no celular: 98–99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
+- **Movimento com propósito, só em CSS** (`transform`/`opacity`): o título do hero entra linha a linha, a linha de cima de cada cartão de Materiais "fecha" ao aparecer,
+  a linha de "Como funciona" se desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
 - **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
   a linha de cima dos cartões de Materiais "fecha" ao entrar, a linha de Como funciona se desenha e o brilho do logotipo (só `transform`). As fotos aparecem sem animação de revelação.
   Entre seções com foto escura, a emenda é um degradê (o hero termina em preto e a seção seguinte nasce do mesmo preto), nunca um corte seco.
-- **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no Contato, interior em A empresa) são da Israel. Nas fotos da sede, as placas dos veículos foram borradas. As fotos de **ambiente** (chuva em janela: `hero-*`, `storm-*`, `house-*`, `town-*`; telhas: `telhas-*`; cobertura: `aplicacao-*`, legendada como "foto ilustrativa")
-  são do Unsplash (licença livre, sem atribuição obrigatória; os créditos estão no rodapé) e **nunca** são apresentadas como obra da empresa.
+- **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no Contato, interior e veículos em A empresa) são da Israel. Nas fotos da sede, as placas dos veículos foram borradas. A foto de **ambiente** do hero (chuva em janela: `hero-*`) e a do quadrado de telhados
+  são do Unsplash (licença livre, sem atribuição obrigatória; os créditos estão no rodapé) e **nunca** são apresentadas como obra da empresa. As demais seções não têm foto de fundo: o ritmo vem da alternância claro/escuro e da tipografia.
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
-  Cada foto de fundo sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
-  o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (telhas, aplicação, obras, sede) usam qualidade maior.
+  Cada foto sai em 3 tamanhos AVIF (`hero-d-1280/1920/2560`, `hero-m-640/900/1170`, `svc-*-480/800/1200`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
+  o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (quadrados, obras, sede) usam qualidade maior.
   A imagem de compartilhamento (`og.jpg`, 1200×630) é um cartão feito com a marca, não um print do site.
 - **Serviços em quadrados** (`#servicos`): 6 quadrados com foto (2 colunas no celular, 3 no desktop). Tocar abre uma janela (`<dialog>` nativo: foco preso, Esc fecha, toque fora fecha, o botão "voltar" do celular fecha)
   com "Por que fazer", "O que a gente faz" e o botão "Quero fazer: pedir orçamento" (WhatsApp, fixo no rodapé da janela). Sem JavaScript/`<dialog>`, o toque leva direto ao WhatsApp. Para editar um serviço, mude o quadrado e a janela `svc-<nome>` no HTML.
-  As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. **Regra: uma foto, um lugar.** As fotos reais da Israel (cobertura e muro de arrimo) aparecem só em Obras; os quadrados usam fotos de banco de domínio público (CC0),
-  legendadas "Foto ilustrativa" e creditadas em "Créditos das fotos", no rodapé (um `<details>`). Troque por fotos reais de outra obra assim que houver, nunca pela mesma foto de Obras.
-- **Carrosséis** (fotos da sede, avaliações e, no celular, obras): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
+  As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. **Regra: uma foto, um lugar.** As fotos reais da Israel (cobertura e muro de arrimo) aparecem só no carrossel de A empresa; os quadrados usam fotos de banco de domínio público (CC0),
+  creditadas em "Créditos das fotos", no rodapé (um `<details>`). Troque por fotos reais de outra obra assim que houver, nunca pela mesma foto do carrossel.
+  Logo abaixo dos quadrados, o bloco "Dois jeitos de fechar a água" explica manta asfáltica × argamassa em duas frases cada (antes eram duas seções: Sistemas e Materiais).
+- **Carrosséis** (A empresa: obras e sede, em fotos quadradas; e avaliações): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
-  Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. No desktop, as duas fotos de obras ficam lado a lado (sem botões).
+  Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`.
+- **Orçamento em um lugar só** (`#contato`): o formulário e os dados de contato ficam juntos. Em vez de uma seção separada de "sinais", a pessoa marca o que está vendo (manchas, mofo, goteira…) em chips dentro do formulário e isso entra na mensagem do WhatsApp ("Estou vendo: …"). O mapa só aparece a partir de 900 px; no celular ficam o endereço e os botões "Como chegar" e Waze.
 - **Fotos usadas e descartadas**: da sede entraram só três (estoque, veículos da equipe e rolos de manta), com as placas borradas antes da limpeza. Ficaram de fora fotos com objetos pessoais, enquadramentos ruins
   e os stories de Instagram (arte de terceiros e texto embutido na imagem). Os originais enviados pelo cliente ficam na pasta `originais-cliente/`, ignorada pelo git de propósito (o repositório é público e as fotos têm placas sem borrar).
 - **Só conteúdo real**: textos, endereço, telefone e avaliações vêm da própria empresa (Google). Sem produtos, preços, números ou clientes inventados.
@@ -46,8 +48,8 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 index.html              conteúdo (textos, SEO e dados estruturados)
 vercel.json             cabeçalhos de segurança (CSP) e cache
 src/css/                base (tokens, tipografia), components (botões, menu, formulário, FAQ), sections (cada seção)
-ordem das seções     hero · sinais · serviços · sistemas · como funciona · obras · a empresa · orçamento · dúvidas · avaliações · contato (fundos claro/escuro se alternam)
-src/js/main.js          menu, cabeçalho, botões flutuantes, sinais e formulário → WhatsApp, revelações ao rolar
+ordem das seções     hero · serviços (+ materiais) · como funciona · a empresa · avaliações · dúvidas · contato (fundos claro/escuro se alternam)
+src/js/main.js          menu, cabeçalho, botão flutuante, horário, carrosséis, janelas de serviço e formulário → WhatsApp
 assets/                 css/js compilados (com hash no nome), fonte, imagens
 scripts/build.mjs       compila src/ → assets/ e atualiza as referências no index.html
 ```
@@ -66,16 +68,16 @@ Para ver localmente: `python3 -m http.server 4173` (ou qualquer servidor estáti
 
 ## Ao registrar o domínio próprio (checklist)
 
-Hoje o endereço é `israel-impermeabilizacoes.vercel.app`. Quando o `.com.br` estiver ativo, troque a URL antiga em: `index.html` (canonical, `og:url`, `og:image`, e os blocos JSON-LD),
+Hoje o endereço declarado no site é `israel-impermeabilizacoes.vercel.app`. Quando o `.com.br` estiver ativo, troque a URL antiga em: `index.html` (canonical, `og:url`, `og:image`, e os blocos JSON-LD),
 `sitemap.xml` e `robots.txt`; depois ligue o domínio no projeto da Vercel e refaça `npm run build`. Redirecione o endereço antigo para o novo.
 
 ## Como editar
 
-- **Textos, horário, endereço, garantia**: `index.html`. O horário aparece em Contato, no rodapé e nos dados estruturados (`openingHoursSpecification`); as perguntas do FAQ aparecem no HTML e também no JSON-LD (mantenha os dois iguais).
+- **Textos, horário, endereço, garantia**: `index.html`. O horário aparece em Contato, no hero e nos dados estruturados (`openingHoursSpecification`); as perguntas do FAQ aparecem no HTML e também no JSON-LD (mantenha os dois iguais).
 - **Número do WhatsApp**: procure por `5514997341789` em `index.html` e em `src/js/main.js`.
 - **Cores e fonte**: variáveis no topo de `src/css/base.css`. Fonte única: Archivo (peso 400–800, largura 80–100%), em `assets/fonts/`.
-- **E-mail**: não há e-mail confirmado, por isso ele não aparece. Para incluir, adicione em `#contato` (bloco `.ct-grid`) e no rodapé.
-- **Fotos de obras**: coloque em `assets/img/` (WebP, com `width`/`height`) e inclua em `#obras` no mesmo formato das atuais.
+- **E-mail**: não há e-mail confirmado, por isso ele não aparece. Para incluir, adicione na lista `.ct-list` de `#contato`.
+- **Fotos de obras**: coloque em `assets/img/` (AVIF/WebP, com `width`/`height`) e inclua como mais um `.car-slide` no carrossel de `#empresa`, no mesmo formato das atuais.
   As duas fotos atuais chegaram com só 384×288 px (os arquivos originais estão no histórico do git, commit `3953801`). Foram ampliadas 4× com o modelo de
   super-resolução Swin2SR (versão "realworld", em ONNX, feita para fotos reais comprimidas: limpa os artefatos sem inventar detalhes). Mesmo assim, o ideal é trocar pelos originais.
   As fotos da sede chegaram pelo WhatsApp (já comprimidas) e passaram pela mesma limpeza, a partir de uma versão reduzida pela metade.

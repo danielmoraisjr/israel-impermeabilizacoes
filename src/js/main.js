@@ -36,7 +36,7 @@ if (hasIO) {
   const links = $$('.nav a');
   const set = (id) => links.forEach((l) => (l.getAttribute('href') === `#${id}` ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
   const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) set(e.target.id); }), { rootMargin: '-45% 0px -50% 0px' });
-  ['servicos', 'sistemas', 'como-funciona', 'obras', 'empresa', 'avaliacoes', 'contato'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+  ['servicos', 'como-funciona', 'empresa', 'avaliacoes', 'contato'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   new IntersectionObserver(([e]) => { if (e.isIntersecting) set(''); }, { rootMargin: '-45% 0px -50% 0px' }).observe($('#inicio'));
 }
 
@@ -59,21 +59,6 @@ if (openEl) {
     openEl.classList.toggle('is-open', open);
     $('span', openEl).textContent = msg;
   } catch { /* sem Intl: fica o horário fixo do HTML */ }
-}
-
-// ---------- sinais de infiltração → mensagem pronta no WhatsApp ----------
-const signs = $('#signs');
-const signsCta = $('#signs-cta');
-const signsLabel = $('#signs-label');
-if (signs && signsCta) {
-  signs.addEventListener('change', () => {
-    const v = $$('input:checked', signs).map((i) => i.value);
-    const text = v.length
-      ? `Olá! Estou com estes sinais de infiltração: ${v.join('; ')}. Gostaria de um orçamento.`
-      : 'Olá! Estou com problema de infiltração e gostaria de um orçamento.';
-    signsCta.href = `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
-    if (signsLabel) signsLabel.textContent = v.length ? `Enviar ${v.length} ${v.length > 1 ? 'sinais' : 'sinal'} no WhatsApp` : 'Enviar no WhatsApp';
-  });
 }
 
 // ---------- revelar ao rolar: fotos reais, camadas dos sistemas e a linha do processo ----------
@@ -159,6 +144,7 @@ if (form) {
     const servico = (f.get('servico') || '').toString();
     const local = (f.get('local') || '').toString().trim();
     const msg = (f.get('msg') || '').toString().trim();
+    const sinais = f.getAll('sinal').map(String);
 
     let ok = true;
     [['nome', nome], ['servico', servico]].forEach(([n, v]) => {
@@ -171,6 +157,7 @@ if (form) {
 
     const linhas = [`Olá! Meu nome é ${nome}.`, `Gostaria de um orçamento: ${servico}.`];
     if (local) linhas.push(`Local: ${local}.`);
+    if (sinais.length) linhas.push(`Estou vendo: ${sinais.join('; ')}.`);
     if (msg) linhas.push(msg);
     linhas.push('Vim pelo site.');
     openWA(linhas.join('\n'));
