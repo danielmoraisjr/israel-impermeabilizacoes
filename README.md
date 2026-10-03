@@ -15,7 +15,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 - **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
   a linha de cima dos cartões de Materiais "fecha" ao entrar, a linha de Como funciona se desenha e o brilho do logotipo (só `transform`). As fotos aparecem sem animação de revelação.
   Entre o hero (escuro) e a seção seguinte (clara) a emenda é uma linha reta, de propósito. O hero não tem foto: a imagem é a logo 3D (`.hero-art`), que se monta uma vez quando aparece na tela.
-- **Imagens**: o site não tem fotos do Israel (obras, estoque, veículos e fachada ficaram de fora a pedido do cliente; os arquivos estão no histórico do git). As únicas fotos são as dos quadrados de Serviços (banco de imagens, sem pessoas nas novas). O hero mostra a **logo 3D**.
+- **Imagens**: todas as fotos de Serviços e da galeria **Obras** são do Israel (enviadas pelo cliente; originais em `originais-cliente/`, fora do git, porque há placas de carro sem borrar). Os recortes saem sem a data e a marca do celular, sem pessoas e sem placas legíveis. As fotos de 960 px (Paredes e Piscinas) passam pela limpeza com IA (Swin2SR) antes de exportar. Não há fotos de banco de imagens no site, exceto o histórico dos créditos no fim deste arquivo.
   O hero não tem foto: no desktop a logo 3D ocupa a metade da direita; no celular vem depois dos botões e se monta quando aparece na tela.
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
   Cada foto sai em 3 tamanhos AVIF (`svc-*-r3-480/800/1200`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
@@ -97,3 +97,8 @@ Os arquivos de `assets/img/` têm cache longo no navegador (e na Vercel). Se voc
 ## Ícones e logo (trocar = mudar o nome do arquivo)
 
 `favicon-v2.svg`, `icon-192-v2.png`, `icon-512-v2.png`, `apple-touch-icon-v2.png` e `logo-mark-v2.svg` (máscara do brilho) vêm da mesma geometria do símbolo. Ao mexer na logo, gere de novo e use `-v3` nos nomes.
+
+
+## Galeria Obras (`#obras`)
+
+Carrossel de rolagem nativa (3 fotos lado a lado no desktop, 2 no tablet, 1 no celular). Cada foto é um `<figure class="car-slide">` com AVIF + WebP e `alt` descritivo; as imagens são `obra-<nome>-<largura>`. Para incluir uma foto nova, exporte nos mesmos tamanhos e acrescente outro `figure` no mesmo formato. Fotos dos quadrados de Serviços usam `-r4-` no nome (próxima troca: `-r5-`).
