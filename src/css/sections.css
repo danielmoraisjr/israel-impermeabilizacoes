@@ -8,11 +8,23 @@
 .hero h1 .ln > span { display: block; animation: up 0.7s var(--ease) both; animation-delay: calc(var(--i) * 0.07s); }
 .hero h1 .dim { color: #9db3c4; }
 .hero .lead { margin-top: 24px; max-width: 34rem; font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem); color: var(--on-d); opacity: 0.88; }
+/* logo 3D da abertura: a casa se monta uma vez (barras sobem, telhado desce, arco desliza) */
+.hero-mark { display: block; width: clamp(108px, 31vw, 136px); height: auto; margin-bottom: 22px; overflow: visible; }
+.hero-mark g { transform-box: fill-box; transform-origin: 50% 100%; }
+.hm-bars { animation: hm-rise 0.8s var(--ease) 0.05s both; }
+.hm-door { animation: hm-fade 0.6s ease 0.6s both; }
+.hm-roof { animation: hm-drop 0.8s var(--ease) 0.3s both; }
+.hm-swoosh { animation: hm-sweep 0.9s var(--ease) 0.5s both; }
+@keyframes hm-rise { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes hm-drop { from { transform: translateY(-36px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes hm-sweep { from { transform: translateX(-34px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes hm-fade { from { opacity: 0; } to { opacity: 1; } }
 .hero-photo { position: relative; margin: 0; background: var(--navy-2); }
 .hero-photo picture { display: block; }
 .hero-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 25%; }
 .hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--ink) 0%, rgba(5, 8, 12, 0) 18%); pointer-events: none; }
 @media (min-width: 960px) {
+  .hero-mark { display: none; }
   .hero-copy { max-width: calc(56vw - (100vw - min(var(--maxw), 100vw - 2 * var(--gut))) / 2 - 40px); }
   .hero h1 { font-size: clamp(3.2rem, min(0.6rem + 5.2vw, 11vh), 6.4rem); }
   .hero-photo { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 42vw; margin: 0; border: 0; }
@@ -178,3 +190,5 @@
   .proc::after { transform: none; }
   .step::before { background: var(--acc); }
 }
+
+@media (min-width: 960px) and (min-height: 820px) { .hero-mark { display: block; width: 104px; margin-bottom: 18px; } }

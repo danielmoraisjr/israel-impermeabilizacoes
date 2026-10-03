@@ -7,7 +7,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 
 ## Princípios
 
-- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte: **Inter** (a mais próxima da SF Pro da Apple), com tamanho óptico automático (títulos grandes usam o corte "Display"), títulos compactos (`letter-spacing` negativo) e hero em três linhas grandes ao lado da foto real da fachada. O arquivo (`assets/fonts/inter.woff2`, ~40 KB) tem só os eixos usados (peso 400–800, tamanho óptico 14–32) e os caracteres do português. As letras do logotipo (ISRAEL / IMPERMEABILIZAÇÕES) são curvas no `<symbol id="i-word">`, então não mudam se a fonte do site mudar. Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
+- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte: **Inter** (a mais próxima da SF Pro da Apple), com tamanho óptico automático (títulos grandes usam o corte "Display"), títulos compactos (`letter-spacing` negativo) e hero em três linhas grandes ao lado da foto real da fachada. O arquivo (`assets/fonts/inter.woff2`, ~40 KB) tem só os eixos usados (peso 400–800, tamanho óptico 14–32) e os caracteres do português. O símbolo (casa, barras, porta e arco) foi **redesenhado em vetor** a partir da logo do cliente (`<symbol id="i-mark">`, plano, no cabeçalho e rodapé) e há uma versão **3D** (camadas de extrusão + degradê, `.hero-mark`) na abertura do site, que se monta uma vez ao carregar (desligada com movimento reduzido). As letras do logotipo (ISRAEL / IMPERMEABILIZAÇÕES) são curvas no `<symbol id="i-word">`, então não mudam se a fonte do site mudar. Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
 - **Página curta, de propósito**: 7 seções (hero · serviços · como funciona · a empresa · avaliações · dúvidas · contato), ≈ 9–10 telas no total (antes eram ≈ 15). Tudo que repetia informação foi fundido ou cortado.
 - **Leve e fluido**: ~26 KB de CSS, ~5,8 KB de JavaScript, uma fonte (40 KB). A primeira tela carrega ~750 KB no desktop e bem menos no celular. Lighthouse no celular: 98–99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
 - **Movimento com propósito, só em CSS** (`transform`/`opacity`): o título do hero entra linha a linha, a linha de cima de cada cartão de Materiais "fecha" ao aparecer,
@@ -93,3 +93,7 @@ As licenças não exigem crédito (Unsplash e CC0), então o site não mostra a 
 ## Trocar uma foto: mude o nome do arquivo
 
 Os arquivos de `assets/img/` têm cache longo no navegador (e na Vercel). Se você trocar a foto **mantendo o mesmo nome**, quem já visitou continua vendo a antiga. Por isso as fotos de Paredes, Muros de arrimo e Alicerces têm `-r3-` no nome (`svc-muros-r3-800.webp`): ao trocar de novo, use `-r4-` e atualize o `index.html`.
+
+## Ícones e logo (trocar = mudar o nome do arquivo)
+
+`favicon-v2.svg`, `icon-192-v2.png`, `icon-512-v2.png`, `apple-touch-icon-v2.png` e `logo-mark-v2.svg` (máscara do brilho) vêm da mesma geometria do símbolo. Ao mexer na logo, gere de novo e use `-v3` nos nomes.
