@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://israel-impermeabilizacoes.vercel.app/sitemap.xml
+Sitemap: https://www.xn--israelimpermeabilizaes-j7b05a.com.br/sitemap.xml

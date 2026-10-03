@@ -70,7 +70,7 @@ Para ver localmente: `python3 -m http.server 4173` (ou qualquer servidor estáti
 
 ## Ao registrar o domínio próprio (checklist)
 
-Hoje o endereço declarado no site é `israel-impermeabilizacoes.vercel.app`. Quando o `.com.br` estiver ativo, troque a URL antiga em: `index.html` (canonical, `og:url`, `og:image`, e os blocos JSON-LD),
+O endereço oficial é **`www.israelimpermeabilizações.com.br`** (no código, em ASCII: `www.xn--israelimpermeabilizaes-j7b05a.com.br`; o acento vira `xn--…` na internet). Está em `index.html` (canonical, `og:image`, JSON-LD), `sitemap.xml` e `robots.txt`. O `israel-impermeabilizacoes.vercel.app` continua funcionando. Se um dia registrarem o sem acento (`israelimpermeabilizacoes.com.br`), troque a URL nesses mesmos lugares e deixe o antigo redirecionando.
 `sitemap.xml` e `robots.txt`; depois ligue o domínio no projeto da Vercel e refaça `npm run build`. Redirecione o endereço antigo para o novo.
 
 ## Como editar
