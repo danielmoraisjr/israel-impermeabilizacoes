@@ -57,8 +57,8 @@ if (openEl) {
     const min = +p.hour * 60 + +p.minute;
     const work = wd >= 1 && wd <= 5;
     const open = work && min >= 7 * 60 + 30 && min < 17 * 60;
-    const when = work && min < 7 * 60 + 30 ? 'hoje' : wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda';
-    const [lead, rest] = open ? ['Atendendo agora', 'até as 17h'] : ['Fora do horário', `respondemos ${when} às 7h30`];
+    const when = work && min < 7 * 60 + 30 ? 'hoje' : wd >= 1 && wd <= 4 ? 'amanhã' : 'seg';
+    const [lead, rest] = open ? ['Aberto agora', 'até as 17h'] : ['Fechado agora', `abre ${when} às 07:30`];
     openEl.classList.toggle('is-open', open);
     const lbl = document.createElement('strong');
     lbl.textContent = lead;
