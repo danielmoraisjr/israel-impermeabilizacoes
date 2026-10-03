@@ -33,9 +33,6 @@
 .shine::before { content: ""; position: absolute; left: -15%; right: -15%; top: 0; height: 55%; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 100%); transform: translateY(190%) rotate(-10deg); will-change: transform; animation: sweep 6s ease-in-out 1.2s infinite; }
 @keyframes sweep { 0% { transform: translateY(190%) rotate(-10deg); } 22%, 100% { transform: translateY(-110%) rotate(-10deg); } }
 .logo-word { width: 142px; height: 38px; }
-.logo-word text { font-family: var(--font); font-weight: 800; }
-.w1 { fill: #00afec; font-size: 25px; }
-.w2 { fill: #fff; font-size: 9.2px; font-weight: 700; letter-spacing: 0.2em; }
 .nav { display: none; gap: 26px; }
 .nav a { position: relative; padding: 6px 0; font-size: 0.95rem; font-weight: 500; text-decoration: none; color: var(--on-d2); transition: color 0.2s; }
 .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease); }
@@ -53,7 +50,7 @@
 .menu { position: fixed; inset: var(--hdr) 0 0 0; z-index: 49; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 28px var(--gut) 32px; background: var(--navy); color: #fff; overflow: auto; visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity 0.25s, transform 0.3s var(--ease), visibility 0s 0.3s; }
 .menu.is-open { visibility: visible; opacity: 1; transform: none; transition: opacity 0.25s, transform 0.3s var(--ease); }
 .menu-nav { display: grid; }
-.menu-nav a { padding: 16px 0; border-bottom: 1px solid var(--line-d); font-size: 1.7rem; font-weight: 700; font-stretch: 88%; text-decoration: none; }
+.menu-nav a { padding: 16px 0; border-bottom: 1px solid var(--line-d); font-size: 1.7rem; font-weight: 700; text-decoration: none; }
 .menu-foot { display: grid; gap: 14px; }
 .menu-foot p { color: var(--on-d2); font-size: 0.95rem; }
 .menu-tel { position: relative; font-weight: 700; text-decoration: none; }
@@ -68,6 +65,7 @@ body.menu-open { overflow: hidden; }
   -webkit-tap-highlight-color: transparent;
 }
 .fab.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.fab.is-off { opacity: 0; transform: scale(0.85); pointer-events: none; visibility: hidden; }
 .fab svg { width: 31px; height: 31px; }
 .fab::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--cyan); opacity: 0; animation: ring 2.6s ease-out 2.5s 3; pointer-events: none; }
 @keyframes ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
@@ -132,7 +130,6 @@ html.dlg-open { overflow: hidden; }
 .dlg-x::after { transform: rotate(-45deg); }
 .dlg-fig { position: relative; margin: 0; aspect-ratio: 16 / 9; background: var(--navy-2); }
 .dlg-fig picture, .dlg-fig img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.dlg-fig figcaption { position: absolute; z-index: 1; left: 12px; bottom: 12px; padding: 4px 10px; background: rgba(5, 8, 12, 0.78); color: #fff; font-size: 0.78rem; border-radius: 2px; }
 .dlg-body { padding: 24px 24px 28px; }
 .dlg-body h3 { font-size: clamp(1.55rem, 1.25rem + 1vw, 2.1rem); }
 .dlg-k { margin: 20px 0 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-d); }

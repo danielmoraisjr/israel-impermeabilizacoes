@@ -43,6 +43,9 @@ if (hasIO) {
 // ---------- botão flutuante do WhatsApp: aparece logo depois que a página abre ----------
 const fab = $('.fab');
 if (fab) setTimeout(() => fab.classList.add('is-on'), 700);
+// no rodapé o botão flutuante some: o próprio rodapé já traz o WhatsApp (e ele não cobre os créditos)
+const foot = $('.foot');
+if (fab && foot && hasIO) new IntersectionObserver(([e]) => fab.classList.toggle('is-off', e.isIntersecting), { threshold: 0.15 }).observe(foot);
 
 // ---------- horário de atendimento: em horário agora, ou quando abrimos (fuso de Brasília) ----------
 const openEl = $('#open');
@@ -54,10 +57,14 @@ if (openEl) {
     const min = +p.hour * 60 + +p.minute;
     const work = wd >= 1 && wd <= 5;
     const open = work && min >= 7 * 60 + 30 && min < 17 * 60;
-    let msg = 'Atendendo agora · até as 17h';
-    if (!open) msg = `Respondemos ${work && min < 7 * 60 + 30 ? 'hoje' : wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda'} a partir das 7h30`;
+    const when = work && min < 7 * 60 + 30 ? 'hoje' : wd >= 1 && wd <= 4 ? 'amanhã' : 'segunda';
+    const [lead, rest] = open ? ['Atendendo agora', 'até as 17h'] : ['Fora do horário', `respondemos ${when} às 7h30`];
     openEl.classList.toggle('is-open', open);
-    $('span', openEl).textContent = msg;
+    const lbl = document.createElement('strong');
+    lbl.textContent = lead;
+    const det = document.createElement('small');
+    det.textContent = rest;
+    $('span', openEl).replaceChildren(lbl, ' ', det);
   } catch { /* sem Intl: fica o horário fixo do HTML */ }
 }
 

@@ -7,9 +7,9 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 
 ## Princípios
 
-- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte (Archivo). Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
+- **Identidade da marca**: azul, branco e preto do logotipo, uma só fonte: **Inter** (a mais próxima da SF Pro da Apple), com tamanho óptico automático (títulos grandes usam o corte "Display"), títulos compactos (`letter-spacing` negativo) e hero em duas linhas enormes. O arquivo (`assets/fonts/inter.woff2`, ~40 KB) tem só os eixos usados (peso 400–800, tamanho óptico 14–32) e os caracteres do português. As letras do logotipo (ISRAEL / IMPERMEABILIZAÇÕES) são curvas no `<symbol id="i-word">`, então não mudam se a fonte do site mudar. Sem ícones decorativos: só o logotipo (com um brilho discreto no topo) e o botão flutuante do WhatsApp.
 - **Página curta, de propósito**: 7 seções (hero · serviços · como funciona · a empresa · avaliações · dúvidas · contato), ≈ 9–10 telas no total (antes eram ≈ 15). Tudo que repetia informação foi fundido ou cortado.
-- **Leve e fluido**: ~25 KB de CSS, ~5,5 KB de JavaScript, uma fonte (45 KB). A primeira tela carrega ~750 KB no desktop e bem menos no celular. Lighthouse no celular: 98–99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
+- **Leve e fluido**: ~26 KB de CSS, ~5,8 KB de JavaScript, uma fonte (40 KB). A primeira tela carrega ~750 KB no desktop e bem menos no celular. Lighthouse no celular: 98–99 em desempenho, 100 em acessibilidade, boas práticas e SEO. Rolagem 100% nativa: nada de rolagem presa, cena fixa ou efeito ligado à rolagem.
 - **Movimento com propósito, só em CSS** (`transform`/`opacity`): o título do hero entra linha a linha, a linha de cima de cada cartão de Materiais "fecha" ao aparecer,
   a linha de "Como funciona" se desenha e o FAQ abre suave. `prefers-reduced-motion` desliga tudo.
 - **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
@@ -28,8 +28,10 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
   Logo abaixo dos quadrados, o bloco "Dois jeitos de fechar a água" explica manta asfáltica × argamassa em duas frases cada (antes eram duas seções: Sistemas e Materiais).
 - **Carrosséis** (A empresa: obras e sede, em fotos quadradas; e avaliações): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
-  Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`.
-- **Orçamento em um lugar só** (`#contato`): o formulário e os dados de contato ficam juntos. Em vez de uma seção separada de "sinais", a pessoa marca o que está vendo (manchas, mofo, goteira…) em chips dentro do formulário e isso entra na mensagem do WhatsApp ("Estou vendo: …"). O mapa só aparece a partir de 900 px; no celular ficam o endereço e os botões "Como chegar" e Waze.
+  Para incluir uma foto ou avaliação, basta acrescentar mais um item `.car-slide` dentro do `.car-track`. O carrossel de A empresa abre com a foto real mais nítida (veículos da sede); as duas fotos de obra chegaram com só 384×288 px e, mesmo ampliadas 4× com IA (Swin2SR) e com acabamento de clareza, continuam limitadas: **peça os originais do celular ao cliente (enviados como "documento" no WhatsApp)** e troque `obra-cobertura-*` e `obra-muro-*`.
+- **Orçamento em um lugar só** (`#contato`): frase, foto da fachada e formulário. Em vez de uma seção separada de "sinais", a pessoa marca o que está vendo (manchas, mofo, goteira…) em chips dentro do formulário e isso entra na mensagem do WhatsApp ("Estou vendo: …").
+- **Rodapé = fechamento do site** (`#rodape`): os dois telefones em tipografia grande (o primeiro é WhatsApp e ligação; o segundo, ligação), botão de WhatsApp, horário, Instagram com o @, mapa do Google (carregado só quando chega perto, `loading="lazy"`) e cartão com endereço, "Como chegar" e Waze. O botão flutuante do WhatsApp some quando o rodapé aparece (o rodapé já tem o seu e o botão não cobre os créditos). **Facebook**: a empresa ainda não informou página; quando houver, inclua uma linha em `.foot-info` e o link em `sameAs` no JSON-LD.
+- **Horário no hero**: duas partes, estado em negrito + detalhe ("Atendendo agora · até as 17h" ou "Fora do horário · respondemos segunda às 7h30"). No celular o detalhe vai para a linha de baixo.
 - **Fotos usadas e descartadas**: da sede entraram só três (estoque, veículos da equipe e rolos de manta), com as placas borradas antes da limpeza. Ficaram de fora fotos com objetos pessoais, enquadramentos ruins
   e os stories de Instagram (arte de terceiros e texto embutido na imagem). Os originais enviados pelo cliente ficam na pasta `originais-cliente/`, ignorada pelo git de propósito (o repositório é público e as fotos têm placas sem borrar).
 - **Só conteúdo real**: textos, endereço, telefone e avaliações vêm da própria empresa (Google). Sem produtos, preços, números ou clientes inventados.
@@ -75,7 +77,7 @@ Hoje o endereço declarado no site é `israel-impermeabilizacoes.vercel.app`. Qu
 
 - **Textos, horário, endereço, garantia**: `index.html`. O horário aparece em Contato, no hero e nos dados estruturados (`openingHoursSpecification`); as perguntas do FAQ aparecem no HTML e também no JSON-LD (mantenha os dois iguais).
 - **Número do WhatsApp**: procure por `5514997341789` em `index.html` e em `src/js/main.js`.
-- **Cores e fonte**: variáveis no topo de `src/css/base.css`. Fonte única: Archivo (peso 400–800, largura 80–100%), em `assets/fonts/`.
+- **Cores e fonte**: variáveis no topo de `src/css/base.css`. Fonte única: Inter (peso 400–800, tamanho óptico 14–32), em `assets/fonts/`.
 - **E-mail**: não há e-mail confirmado, por isso ele não aparece. Para incluir, adicione na lista `.ct-list` de `#contato`.
 - **Fotos de obras**: coloque em `assets/img/` (AVIF/WebP, com `width`/`height`) e inclua como mais um `.car-slide` no carrossel de `#empresa`, no mesmo formato das atuais.
   As duas fotos atuais chegaram com só 384×288 px (os arquivos originais estão no histórico do git, commit `3953801`). Foram ampliadas 4× com o modelo de
