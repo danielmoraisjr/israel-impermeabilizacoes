@@ -15,7 +15,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 - **Nada preso à rolagem**: sem parallax, sem foto "grudada" na tela e sem efeitos ligados à posição da rolagem (o Edge no Windows engasgava com eles). Movimento só onde ajuda: o título do hero entra uma vez,
   a linha de cima dos cartões de Materiais "fecha" ao entrar, a linha de Como funciona se desenha e o brilho do logotipo (só `transform`). As fotos aparecem sem animação de revelação.
   Entre o hero (escuro) e a seção seguinte (clara) a emenda é uma linha reta, de propósito; o hero é a única seção com foto grande e ela é real (a fachada do Israel).
-- **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no hero, estoque no Contato, veículos e rolos em A empresa) são do Israel. Nas fotos da sede, as placas dos veículos foram borradas. Fotos de banco de imagens (Unsplash/CC0) só aparecem nos quadrados de Serviços, sem dizer que são da empresa (créditos no rodapé).
+- **Imagens**: as fotos de **obras** (`obra-*`) e da **sede** (`sede-*`: fachada no hero, estoque no Contato, veículos e rolos em A empresa) são do Israel. Nas fotos da sede, as placas dos veículos foram borradas. Fotos de banco de imagens (Unsplash/CC0) só aparecem nos quadrados de Serviços, sem dizer que são da empresa (créditos no fim deste arquivo).
   A foto do hero é a fachada real; no desktop ocupa a metade da direita até a borda da tela, no celular vira uma faixa depois dos botões (o hero do celular é só texto, o que também acelera a abertura). **Uma foto, um lugar.** O texto do site trata o Israel sempre no masculino ("o Israel", "do Israel").
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
   Cada foto sai em 3 tamanhos AVIF (`sede-fachada-600/1200/1600`, `svc-*-480/800/1200`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
@@ -24,7 +24,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 - **Serviços em quadrados** (`#servicos`): 6 quadrados com foto (2 colunas no celular, 3 no desktop). Tocar abre uma janela (`<dialog>` nativo: foco preso, Esc fecha, toque fora fecha, o botão "voltar" do celular fecha)
   com "Por que fazer", "O que a gente faz" e o botão "Quero fazer: pedir orçamento" (WhatsApp, fixo no rodapé da janela). Sem JavaScript/`<dialog>`, o toque leva direto ao WhatsApp. Para editar um serviço, mude o quadrado e a janela `svc-<nome>` no HTML.
   As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. **Regra: uma foto, um lugar.** As fotos reais da Israel (cobertura e muro de arrimo) aparecem só no carrossel de A empresa; os quadrados usam fotos de banco de domínio público (CC0),
-  creditadas em "Créditos das fotos", no rodapé (um `<details>`). Troque por fotos reais de outra obra assim que houver, nunca pela mesma foto do carrossel.
+  sem crédito no site (a licença não exige; veja o fim deste arquivo). Troque por fotos reais de outra obra assim que houver, nunca pela mesma foto do carrossel.
   Logo abaixo dos quadrados, o bloco "Dois jeitos de fechar a água" explica manta asfáltica × argamassa em duas frases cada (antes eram duas seções: Sistemas e Materiais).
 - **Carrosséis** (A empresa: obras e sede, em fotos quadradas; e avaliações): rolagem nativa do navegador com encaixe (`scroll-snap`); funciona por toque, mouse e teclado (setas, com o trilho em foco) e, sem JavaScript,
   continua deslizável. O JS (`[data-car]` em `src/js/main.js`) só cria botões e pontos e dá rótulos de acessibilidade ("1 de 3"). Sem rotação automática, de propósito (leitura e movimento reduzido).
@@ -83,3 +83,8 @@ Hoje o endereço declarado no site é `israel-impermeabilizacoes.vercel.app`. Qu
   As duas fotos atuais chegaram com só 384×288 px (os arquivos originais estão no histórico do git, commit `3953801`). Foram ampliadas 4× com o modelo de
   super-resolução Swin2SR (versão "realworld", em ONNX, feita para fotos reais comprimidas: limpa os artefatos sem inventar detalhes). Mesmo assim, o ideal é trocar pelos originais.
   As fotos da sede chegaram pelo WhatsApp (já comprimidas) e passaram pela mesma limpeza, a partir de uma versão reduzida pela metade.
+
+## Créditos das fotos de banco (não aparecem no site)
+
+As licenças não exigem crédito (Unsplash e CC0), então o site não mostra a lista. Fica aqui como registro: **Unsplash** (licença livre): Max van den Oetelaar, Glenn Carstens-Peters, Will Henfield, Pilar Rubio, Michael Jasmund e Ömer Haktan Bulut (fotos de ambiente; só a do quadrado de telhados continua no site).
+**CC0**: parede, de Solo Shutter (StockSnap); piscina e laje, de Alina Kakshapati, muro de arrimo, de Bigul Malayi, e alicerces, de appealdahal (WordPress Photo Directory). Se algum dia entrar uma foto com licença que exija crédito (por exemplo, CC BY), o crédito volta ao rodapé.
