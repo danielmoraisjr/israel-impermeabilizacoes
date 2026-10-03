@@ -152,7 +152,6 @@ if (form) {
     const servico = (f.get('servico') || '').toString();
     const local = (f.get('local') || '').toString().trim();
     const msg = (f.get('msg') || '').toString().trim();
-    const sinais = f.getAll('sinal').map(String);
 
     let ok = true;
     [['nome', nome], ['servico', servico]].forEach(([n, v]) => {
@@ -165,8 +164,7 @@ if (form) {
 
     const linhas = [`Olá! Meu nome é ${nome}.`, `Gostaria de um orçamento: ${servico}.`];
     if (local) linhas.push(`Local: ${local}.`);
-    if (sinais.length) linhas.push(`Estou vendo: ${sinais.join('; ')}.`);
-    if (msg) linhas.push(msg);
+    if (msg) linhas.push(`O que estou vendo: ${msg}`);
     linhas.push('Vim pelo site.');
     openWA(linhas.join('\n'));
   });
