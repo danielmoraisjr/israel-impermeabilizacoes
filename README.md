@@ -86,10 +86,10 @@ Hoje o endereço declarado no site é `israel-impermeabilizacoes.vercel.app`. Qu
 
 ## Créditos das fotos de banco (não aparecem no site)
 
-As licenças não exigem crédito (Unsplash e CC0), então o site não mostra a lista. Fica aqui como registro: **Unsplash** (licença livre): Max van den Oetelaar, Glenn Carstens-Peters, Will Henfield, Pilar Rubio, Michael Jasmund e Ömer Haktan Bulut (fotos de ambiente; só a do quadrado de telhados continua no site); Derrick Pare (quadrado de Paredes, reboco) e Hammilton Ojijo (quadrado de Alicerces, concretagem), ambos em alta resolução.
+As licenças não exigem crédito (Unsplash e CC0), então o site não mostra a lista. Fica aqui como registro: **Unsplash** (licença livre): Max van den Oetelaar, Glenn Carstens-Peters, Will Henfield, Pilar Rubio, Michael Jasmund e Ömer Haktan Bulut (fotos de ambiente; só a do quadrado de telhados continua no site); Brandon Griggs (quadrado de Paredes), Sergej / skstrannik (Muros de arrimo) e Iain / photoken123 (Alicerces e baldrames, vista aérea), todos em alta resolução e sem pessoas
 **CC0** (WordPress Photo Directory): piscina e laje, de Alina Kakshapati; muro de arrimo, de Bigul Malayi. Se algum dia entrar uma foto com licença que exija crédito (por exemplo, CC BY), o crédito volta ao rodapé.
 
 
 ## Trocar uma foto: mude o nome do arquivo
 
-Os arquivos de `assets/img/` têm cache longo no navegador (e na Vercel). Se você trocar a foto **mantendo o mesmo nome**, quem já visitou continua vendo a antiga. Por isso as fotos de Paredes, Muros de arrimo e Alicerces têm `-r2-` no nome (`svc-muros-r2-800.webp`): ao trocar de novo, use `-r3-` e atualize o `index.html`.
+Os arquivos de `assets/img/` têm cache longo no navegador (e na Vercel). Se você trocar a foto **mantendo o mesmo nome**, quem já visitou continua vendo a antiga. Por isso as fotos de Paredes, Muros de arrimo e Alicerces têm `-r3-` no nome (`svc-muros-r3-800.webp`): ao trocar de novo, use `-r4-` e atualize o `index.html`.
