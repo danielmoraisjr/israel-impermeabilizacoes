@@ -20,7 +20,7 @@ Site estático (HTML + CSS + JS), sem framework e sem bibliotecas. Hospedado na 
 - **Nitidez das imagens**: todas passam por limpeza de artefatos de compressão e ampliação com o modelo Swin2SR (versão "realworld", ONNX, feito para fotos reais; não inventa detalhe).
   Cada foto sai em 3 tamanhos AVIF (`svc-*-r3-480/800/1200`…) + um WebP de reserva, e o HTML usa `srcset`/`sizes`:
   o celular baixa só o necessário e a tela retina recebe resolução cheia. Fotos sem véu escuro (quadrados, obras, sede) usam qualidade maior.
-  A imagem de compartilhamento (`og-v2.jpg`, 1200×630; ao refazer, mude o nome: o WhatsApp guarda a prévia em cache) é um cartão feito com a marca, não um print do site.
+  A imagem de compartilhamento (`og-v3.jpg`, 1200×630; ao refazer, mude o nome: o WhatsApp guarda a prévia em cache) é um cartão feito com a marca, não um print do site.
 - **Serviços em quadrados** (`#servicos`): 6 quadrados com foto (2 colunas no celular, 3 no desktop). Tocar abre uma janela (`<dialog>` nativo: foco preso, Esc fecha, toque fora fecha, o botão "voltar" do celular fecha)
   com "Por que fazer", "O que a gente faz" e o botão "Quero fazer: pedir orçamento" (WhatsApp, fixo no rodapé da janela). Sem JavaScript/`<dialog>`, o toque leva direto ao WhatsApp. Para editar um serviço, mude o quadrado e a janela `svc-<nome>` no HTML.
   As fotos dos quadrados saem de `assets/img/svc-<nome>-480/800/1200`. **Regra: uma foto, um lugar.** As fotos reais do Israel (cobertura e muro de arrimo) aparecem só no carrossel de A empresa; os quadrados usam fotos de banco (Unsplash e domínio público),
