@@ -1,4 +1,4 @@
-/* ================= HERO (texto grande à esquerda; no desktop, a fachada real ocupa a metade da direita até a borda da tela) ================= */
+/* ================= HERO (texto grande à esquerda; a logo 3D ocupa a metade da direita no desktop e vem depois dos botões no celular) ================= */
 .hero { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - var(--hdr)); background: radial-gradient(70% 60% at 88% 0%, rgba(0, 175, 236, 0.16), rgba(0, 175, 236, 0) 70%), var(--ink); }
 .hero-in { padding-block: clamp(40px, 9vh, 104px) clamp(28px, 5vh, 56px); }
 @media (max-width: 959px) { .hero-in { padding-bottom: 24px; } }
@@ -8,8 +8,10 @@
 .hero h1 .ln > span { display: block; animation: up 0.7s var(--ease) both; animation-delay: calc(var(--i) * 0.07s); }
 .hero h1 .dim { color: #9db3c4; }
 .hero .lead { margin-top: 24px; max-width: 34rem; font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem); color: var(--on-d); opacity: 0.88; }
+.hero-art { display: grid; place-items: center; padding: 8px var(--gut) clamp(40px, 9vw, 64px); background: radial-gradient(52% 60% at 50% 46%, rgba(0, 175, 236, 0.16), rgba(0, 175, 236, 0) 70%); }
+.hero-mark { display: block; width: min(300px, 74vw); height: auto; overflow: visible; }
+.hero-art.rv:not(.in) .hero-mark g { animation-play-state: paused; }
 /* logo 3D da abertura: a casa se monta uma vez (barras sobem, telhado desce, arco desliza) */
-.hero-mark { display: block; width: clamp(108px, 31vw, 136px); height: auto; margin-bottom: 22px; overflow: visible; }
 .hero-mark g { transform-box: fill-box; transform-origin: 50% 100%; }
 .hm-bars { animation: hm-rise 0.8s var(--ease) 0.05s both; }
 .hm-door { animation: hm-fade 0.6s ease 0.6s both; }
@@ -19,19 +21,12 @@
 @keyframes hm-drop { from { transform: translateY(-36px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes hm-sweep { from { transform: translateX(-34px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes hm-fade { from { opacity: 0; } to { opacity: 1; } }
-.hero-photo { position: relative; margin: 0; background: var(--navy-2); }
-.hero-photo picture { display: block; }
-.hero-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 25%; }
-.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--ink) 0%, rgba(5, 8, 12, 0) 18%); pointer-events: none; }
 @media (min-width: 960px) {
-  .hero-mark { display: none; }
+  .hero-art { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 42vw; padding: 0 3vw; background: radial-gradient(60% 55% at 50% 50%, rgba(0, 175, 236, 0.2), rgba(0, 175, 236, 0) 72%); }
+  .hero-mark { width: clamp(260px, 29vw, 520px); }
   .hero-copy { max-width: calc(56vw - (100vw - min(var(--maxw), 100vw - 2 * var(--gut))) / 2 - 40px); }
   .hero h1 { font-size: clamp(3.2rem, min(0.6rem + 5.2vw, 11vh), 6.4rem); }
-  .hero-photo { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 42vw; margin: 0; border: 0; }
-  .hero-photo picture, .hero-photo img { height: 100%; }
-  .hero-photo img { aspect-ratio: auto; object-position: 50% 30%; }
-  .hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--ink) 0%, rgba(5, 8, 12, 0.35) 22%, rgba(5, 8, 12, 0) 48%); }
-}
+        }
 .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; margin-top: 36px; }
 .hero-help { margin-top: 18px; font-size: 0.92rem; color: var(--on-d); opacity: 0.86; }
 .hero-proof { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-d); font-size: 0.95rem; font-weight: 600; color: var(--on-d); }
@@ -191,4 +186,3 @@
   .step::before { background: var(--acc); }
 }
 
-@media (min-width: 960px) and (min-height: 820px) { .hero-mark { display: block; width: 104px; margin-bottom: 18px; } }
